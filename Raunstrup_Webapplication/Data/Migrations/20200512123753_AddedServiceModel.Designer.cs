@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Raunstrup_Webapplication.Data;
 
 namespace Raunstrup_Webapplication.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200512123753_AddedServiceModel")]
+    partial class AddedServiceModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -395,36 +397,6 @@ namespace Raunstrup_Webapplication.Data.Migrations
                     b.ToTable("ResourceModel");
                 });
 
-            modelBuilder.Entity("Raunstrup_Webapplication.Models.ServiceLineModel", b =>
-                {
-                    b.Property<int>("Service_Line_ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("ForeignKey1_Res_ID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ForeignKey2_Service_ID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ForeignKey3_Offer_ID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Resource_Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Service_Line_ID");
-
-                    b.HasIndex("ForeignKey1_Res_ID");
-
-                    b.HasIndex("ForeignKey2_Service_ID");
-
-                    b.HasIndex("ForeignKey3_Offer_ID");
-
-                    b.ToTable("ServiceLineModel");
-                });
-
             modelBuilder.Entity("Raunstrup_Webapplication.Models.ServiceModel", b =>
                 {
                     b.Property<int>("Service_ID")
@@ -526,21 +498,6 @@ namespace Raunstrup_Webapplication.Data.Migrations
                     b.HasOne("Raunstrup_Webapplication.Models.CustomerModel", "ForeignKey2_")
                         .WithMany()
                         .HasForeignKey("ForeignKey2_Costumor_Id");
-                });
-
-            modelBuilder.Entity("Raunstrup_Webapplication.Models.ServiceLineModel", b =>
-                {
-                    b.HasOne("Raunstrup_Webapplication.Models.ResourceModel", "ForeignKey1_")
-                        .WithMany()
-                        .HasForeignKey("ForeignKey1_Res_ID");
-
-                    b.HasOne("Raunstrup_Webapplication.Models.ServiceModel", "ForeignKey2_")
-                        .WithMany()
-                        .HasForeignKey("ForeignKey2_Service_ID");
-
-                    b.HasOne("Raunstrup_Webapplication.Models.OfferModel", "ForeignKey3_")
-                        .WithMany()
-                        .HasForeignKey("ForeignKey3_Offer_ID");
                 });
 #pragma warning restore 612, 618
         }

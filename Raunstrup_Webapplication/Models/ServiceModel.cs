@@ -8,7 +8,7 @@ namespace Raunstrup_Webapplication.Models
 {
     public class ServiceModel
     {
-        [Required]
+        [Required] [Key]
         [Display(Name = "Service ID")]
         public int Service_ID { get; set; }
 

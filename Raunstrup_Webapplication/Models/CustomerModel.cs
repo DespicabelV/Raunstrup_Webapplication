@@ -21,7 +21,6 @@ namespace Raunstrup_Webapplication.Models
         [Display(Name = "Mail Address")]
         public string Email { get; set; }
 
-        [Phone]
         [Display(Name = "Phone number")]
         public int Phone_Num { get; set; }
 

@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Raunstrup_Webapplication.Models
 {
     public class EmployeeVehicleModel
-    {
-        [Required]
+    { 
+        [Key][Required]
         [Display(Name = "License Plate")]
         public int License_Plate { get; set; }
 
@@ -20,7 +21,8 @@ namespace Raunstrup_Webapplication.Models
 
         public string Type { get; set; }
 
+
         [Display(Name = "Employee ID")]
-        public EmployeeModel Employee_ID { get; set; }
+        public EmployeeModel ForeignKey1_ { get; set; }
     }
 }

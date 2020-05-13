@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace Raunstrup_Webapplication.Models
 {
     public class OfferModel
     {
-        [Required]
+        [Required] [Key]
         [Display(Name = "Offer ID")]
         public int Offer_ID { get; set; }
 
@@ -26,7 +27,7 @@ namespace Raunstrup_Webapplication.Models
         public double Offer_Price { get; set; }
 
         [Display(Name = "Customer ID")]
-        public CustomerModel Customer_ID { get; set; }
+        public CustomerModel ForeignKey1_ { get; set; }
 
         public byte Status { get; set; }
     }

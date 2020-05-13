@@ -14,5 +14,13 @@ namespace Raunstrup_Webapplication.Data
         {
         }
         public DbSet<Raunstrup_Webapplication.Models.CustomerModel> CustomerModel { get; set; }
+        public DbSet<Raunstrup_Webapplication.Models.EmployeeModel> EmployeeModel { get; set; }
+        public DbSet<Raunstrup_Webapplication.Models.OfferModel> OfferModel { get; set; }
+        public DbSet<Raunstrup_Webapplication.Models.EmployeeOfferModel> EmployeeOfferModel { get; set; }
+        public DbSet<Raunstrup_Webapplication.Models.EmployeeVehicleModel> EmployeeVehicleModel { get; set; }
+        public DbSet<Raunstrup_Webapplication.Models.ResourceModel> ResourceModel { get; set; }
+        public DbSet<Raunstrup_Webapplication.Models.OrderModel> OrderModel { get; set; }
+        public DbSet<Raunstrup_Webapplication.Models.ServiceModel> ServiceModel { get; set; }
+        public DbSet<Raunstrup_Webapplication.Models.ServiceLineModel> ServiceLineModel { get; set; }
     }
 }

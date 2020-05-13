@@ -1,4 +1,4 @@
-﻿@model Raunstrup_Webapplication.Models.CustomerModel
+﻿@model Raunstrup_Webapplication.Models.OfferModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -9,43 +9,43 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>CustomerModel</h4>
+    <h4>OfferModel</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Offer_Title)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Offer_Title)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayNameFor(model => model.Start_date)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Address)
+            @Html.DisplayFor(model => model.Start_date)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.End_Date)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
+            @Html.DisplayFor(model => model.End_Date)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Phone_Num)
+            @Html.DisplayNameFor(model => model.Offer_Price)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Phone_Num)
+            @Html.DisplayFor(model => model.Offer_Price)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Custumor_Group)
+            @Html.DisplayNameFor(model => model.Status)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Custumor_Group)
+            @Html.DisplayFor(model => model.Status)
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="Costumor_Id" />
+        <input type="hidden" asp-for="Offer_ID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

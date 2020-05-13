@@ -8,7 +8,7 @@ namespace Raunstrup_Webapplication.Models
 {
     public class EmployeeModel
     {
-        [Required]
+        [Required] [Key]
         [Display(Name = "Employee ID")]
         public int Employee_ID { get; set; }
 
