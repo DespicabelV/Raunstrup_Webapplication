@@ -21,5 +21,7 @@ namespace Raunstrup_Webapplication.Models
 
         [Display(Name = "Customer ID")]
         public CustomerModel ForeignKey2_ { get; set; }
+
+
     }
 }
