@@ -14,6 +14,7 @@ namespace Raunstrup_Webapplication.Models
         [Display(Name = "Resource ID")]
         public int Res_ID { get; set; }
 
+
         public string Name { get; set; }
 
         [Display(Name = "Store Price")]

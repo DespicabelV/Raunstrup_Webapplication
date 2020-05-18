@@ -23,37 +23,35 @@ namespace Raunstrup_Webapplication.API
 
         // GET: api/Nichlas_Temp_API
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CustomerModel>>> GetCustomerModel()
+        public async Task<ActionResult<IEnumerable<OfferModel>>> GetOfferModel()
         {
-            return await _context.CustomerModel.ToListAsync();
+            return await _context.OfferModel.Include(c => c.Status).ToListAsync();
         }
 
         // GET: api/Nichlas_Temp_API/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<CustomerModel>> GetCustomerModel(int id)
+        public async Task<ActionResult<OfferModel>> GetOfferModel(int id)
         {
-            var customerModel = await _context.CustomerModel.FindAsync(id);
+            var offerModel = await _context.OfferModel.FindAsync(id);
 
-            if (customerModel == null)
+            if (offerModel == null)
             {
                 return NotFound();
             }
 
-            return customerModel;
+            return offerModel;
         }
 
         // PUT: api/Nichlas_Temp_API/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomerModel(int id, CustomerModel customerModel)
+        public async Task<IActionResult> PutOfferModel(int id, OfferModel offerModel)
         {
-            if (id != customerModel.Costumor_Id)
+            if (id != offerModel.Offer_ID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(customerModel).State = EntityState.Modified;
+            _context.Entry(offerModel).State = EntityState.Modified;
 
             try
             {
@@ -75,31 +73,29 @@ namespace Raunstrup_Webapplication.API
         }
 
         // POST: api/Nichlas_Temp_API
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<CustomerModel>> PostCustomerModel(CustomerModel customerModel)
+        public async Task<ActionResult<OfferModel>> PostOfferModel(OfferModel offerModel)
         {
-            _context.CustomerModel.Add(customerModel);
+            _context.OfferModel.Add(offerModel);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCustomerModel", new { id = customerModel.Costumor_Id }, customerModel);
+            return CreatedAtAction("GetOfferModel", new { id = offerModel.Offer_ID }, offerModel);
         }
 
         // DELETE: api/Nichlas_Temp_API/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<CustomerModel>> DeleteCustomerModel(int id)
+        public async Task<ActionResult<OfferModel>> DeleteOfferModel(int id)
         {
-            var customerModel = await _context.CustomerModel.FindAsync(id);
-            if (customerModel == null)
+            var offerModel = await _context.OfferModel.FindAsync(id);
+            if (offerModel == null)
             {
                 return NotFound();
             }
 
-            _context.CustomerModel.Remove(customerModel);
+            _context.OfferModel.Remove(offerModel);
             await _context.SaveChangesAsync();
 
-            return customerModel;
+            return offerModel;
         }
 
         private bool CustomerModelExists(int id)
