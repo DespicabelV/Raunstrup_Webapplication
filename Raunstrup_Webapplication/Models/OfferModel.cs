@@ -18,9 +18,11 @@ namespace Raunstrup_Webapplication.Models
         public string Offer_Title { get; set; }
 
         [Display(Name = "Start Date")]
+        [DataType(DataType.Date)]
         public DateTime Start_date { get; set; }
 
         [Display(Name = "End Date")]
+        [DataType(DataType.Date)]
         public DateTime End_Date { get; set; }
 
         [Display(Name = "Offer Price")]
@@ -29,6 +31,7 @@ namespace Raunstrup_Webapplication.Models
         [Display(Name = "Customer ID")]
         public CustomerModel ForeignKey1_ { get; set; }
 
-        public byte Status { get; set; }
+        public string Status { get; set; }
+
     }
 }
