@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Raunstrup_Webapplication.Data;
 
 namespace Raunstrup_Webapplication.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200515070801_ChangedStatusInOfferModel")]
+    partial class ChangedStatusInOfferModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -282,9 +284,6 @@ namespace Raunstrup_Webapplication.Data.Migrations
                     b.Property<int?>("ForeignKey2_Employee_ID")
                         .HasColumnType("int");
 
-                    b.Property<int>("HoursWorked")
-                        .HasColumnType("int");
-
                     b.HasKey("EmployeeOffer_ID");
 
                     b.HasIndex("ForeignKey1_Offer_ID");
@@ -405,9 +404,6 @@ namespace Raunstrup_Webapplication.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Added_Quantity")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ForeignKey1_Res_ID")
                         .HasColumnType("int");
 
@@ -418,9 +414,6 @@ namespace Raunstrup_Webapplication.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Resource_Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Used_Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("Service_Line_ID");

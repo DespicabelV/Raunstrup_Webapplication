@@ -14,5 +14,8 @@ namespace Raunstrup_Webapplication.Models
 
         public OfferModel ForeignKey1_ { get; set; }
         public EmployeeModel ForeignKey2_ { get; set; }
+
+        [Display(Name = "Hours Worked")]
+        public int HoursWorked { get; set; }
     }
 }

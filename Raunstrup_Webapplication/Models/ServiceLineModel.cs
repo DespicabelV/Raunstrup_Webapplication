@@ -20,6 +20,10 @@ namespace Raunstrup_Webapplication.Models
         [Display(Name = "Resource Quantity")]
         public int Resource_Quantity { get; set; }
 
+        public int Used_Quantity { get; set; }
+
+        public int Added_Quantity { get; set; }
+
         [Display(Name = "Service ID")]
         public ServiceModel ForeignKey2_ { get; set; }
 
