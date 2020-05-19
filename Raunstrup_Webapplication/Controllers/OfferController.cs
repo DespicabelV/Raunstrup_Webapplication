@@ -20,9 +20,17 @@ namespace Raunstrup_Webapplication.Controllers
         }
 
         // GET: Offer
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string OfferName)
         {
-            return View(await _context.OfferModel.ToListAsync());
+            if (OfferName != null)
+            {
+                var Data = _context.OfferModel.Where(o => o.Offer_Title.Contains(OfferName)).ToList();
+                return View(Data);
+            }
+            else
+            {
+                return View(await _context.OfferModel.ToListAsync());
+            }
         }
 
         // GET: Offer/Details/5
@@ -54,7 +62,7 @@ namespace Raunstrup_Webapplication.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Offer_ID,Offer_Title,Start_date,End_Date,Offer_Price,Status")] OfferModel offerModel)
+        public async Task<IActionResult> Create([Bind("Offer_ID,Offer_Title,ForeignKey1_,Start_date,End_Date,Offer_Price,Status")] OfferModel offerModel)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +94,7 @@ namespace Raunstrup_Webapplication.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Offer_ID,Offer_Title,Start_date,End_Date,Offer_Price,Status")] OfferModel offerModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Offer_ID,Offer_Title,ForeignKey1_,Start_date,End_Date,Offer_Price,Status")] OfferModel offerModel)
         {
             if (id != offerModel.Offer_ID)
             {

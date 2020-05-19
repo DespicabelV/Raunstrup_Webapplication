@@ -1,0 +1,49 @@
+﻿@model Raunstrup_Webapplication.Models.ServiceLineModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>OfferModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ForeignKey3_)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ForeignKey3_)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ForeignKey1_)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ForeignKey1_)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ForeignKey2_)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ForeignKey2_)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Resource_Quantity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Resource_Quantity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Added_Quantity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Added_Quantity)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Service_Line_ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
