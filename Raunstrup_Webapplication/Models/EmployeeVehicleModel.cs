@@ -21,8 +21,10 @@ namespace Raunstrup_Webapplication.Models
 
         public string Type { get; set; }
 
-
         [Display(Name = "Employee ID")]
         public EmployeeModel ForeignKey1_ { get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }

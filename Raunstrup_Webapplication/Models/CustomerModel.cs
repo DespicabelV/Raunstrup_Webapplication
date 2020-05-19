@@ -27,5 +27,8 @@ namespace Raunstrup_Webapplication.Models
         [Range(1,3)]
         [Display(Name = "Customer Group")]
         public byte Custumor_Group { get; set; }
+
+        [Timestamp] 
+        public byte[] RowVersion { get; set; }
     }
 }

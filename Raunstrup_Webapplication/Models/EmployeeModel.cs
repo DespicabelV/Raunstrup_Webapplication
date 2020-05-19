@@ -18,5 +18,8 @@ namespace Raunstrup_Webapplication.Models
         public double Salary { get; set; }
 
         public string Expertise { get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }

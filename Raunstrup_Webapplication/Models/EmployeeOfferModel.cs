@@ -17,5 +17,8 @@ namespace Raunstrup_Webapplication.Models
 
         [Display(Name = "Hours Worked")]
         public int HoursWorked { get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }

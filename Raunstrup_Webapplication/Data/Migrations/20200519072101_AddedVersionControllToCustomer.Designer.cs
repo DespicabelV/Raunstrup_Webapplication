@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Raunstrup_Webapplication.Data;
 
 namespace Raunstrup_Webapplication.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200519072101_AddedVersionControllToCustomer")]
+    partial class AddedVersionControllToCustomer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -266,11 +268,6 @@ namespace Raunstrup_Webapplication.Data.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
 
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
                     b.Property<double>("Salary")
                         .HasColumnType("float");
 
@@ -294,11 +291,6 @@ namespace Raunstrup_Webapplication.Data.Migrations
 
                     b.Property<int>("HoursWorked")
                         .HasColumnType("int");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
 
                     b.HasKey("EmployeeOffer_ID");
 
@@ -324,11 +316,6 @@ namespace Raunstrup_Webapplication.Data.Migrations
 
                     b.Property<double>("Km_Price")
                         .HasColumnType("float");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
 
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
@@ -359,11 +346,6 @@ namespace Raunstrup_Webapplication.Data.Migrations
                     b.Property<string>("Offer_Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
                     b.Property<DateTime>("Start_date")
                         .HasColumnType("datetime2");
 
@@ -393,11 +375,6 @@ namespace Raunstrup_Webapplication.Data.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
                     b.HasKey("Order_ID");
 
                     b.HasIndex("ForeignKey1_Offer_ID");
@@ -419,11 +396,6 @@ namespace Raunstrup_Webapplication.Data.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
 
                     b.Property<double>("Store_Price")
                         .HasColumnType("float");
@@ -455,11 +427,6 @@ namespace Raunstrup_Webapplication.Data.Migrations
                     b.Property<int>("Resource_Quantity")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
                     b.Property<int>("Used_Quantity")
                         .HasColumnType("int");
 
@@ -484,11 +451,6 @@ namespace Raunstrup_Webapplication.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
 
                     b.HasKey("Service_ID");
 

@@ -14,5 +14,8 @@ namespace Raunstrup_Webapplication.Models
 
         [StringLength(255)]
         public string Name { get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }

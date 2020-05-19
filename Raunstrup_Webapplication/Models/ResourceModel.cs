@@ -22,6 +22,8 @@ namespace Raunstrup_Webapplication.Models
 
         [Display(Name = "Customer Price")]
         public double Customer_Price { get; set; }
+        
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
-
 }

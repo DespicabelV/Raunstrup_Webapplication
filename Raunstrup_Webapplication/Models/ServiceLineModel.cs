@@ -30,5 +30,8 @@ namespace Raunstrup_Webapplication.Models
 
         [Display(Name = "Offer ID")]
         public OfferModel ForeignKey3_ { get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }

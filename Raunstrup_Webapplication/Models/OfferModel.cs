@@ -33,5 +33,7 @@ namespace Raunstrup_Webapplication.Models
 
         public string Status { get; set; }
 
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }
