@@ -1,13 +1,15 @@
-﻿@using System.Runtime.Versioning
-@model IEnumerable<Raunstrup_Webapplication.Models.ResourceModel>
-
-
+﻿@model Raunstrup_Webapplication.ViewModel.PrintViewModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Print/E-mail</h1>
+
+<form asp-action="Index">
+    <input type="text" id="Filter" name="OfferID" />
+    <button class="btn btn-primary" type="submit">Search</button>
+</form>
 
 @if (Model == null)
 {
@@ -18,71 +20,96 @@ else
     <section class="row mb-3">
 
         <section class="col-3">
-
         </section>
 
+
         <table class="table table-bordered col-6 text-center">
-            @foreach (var resource in Model)
+            @foreach (var offerModel in Model.OfferModels)
             {
                 <tr>
                     <th>ID</th>
-                    <td>@resource.Res_ID</td>
+                    <td>@offerModel.Offer_ID</td>
                 </tr>
+
                 <tr>
                     <th>Title</th>
-                    <td>@resource.Name</td>
+                    <td>@offerModel.Offer_Title</td>
                 </tr>
+
                 <tr>
                     <th>Start Date</th>
-                    <td>@resource.Store_Price</td>
+                    <td>@offerModel.Start_date.ToShortDateString()</td>
                 </tr>
+
                 <tr>
                     <th>End Date</th>
-                    <td>@resource.Customer_Price</td>
+                    <td>@offerModel.End_Date.ToShortDateString()</td>
                 </tr>
-            @*<tr  class="table-bordered">
+
+                <tr>
                     <th>Price</th>
-                    <td>@resource.Offer_Price</td>
+                    <td>@offerModel.Offer_Price</td>
                 </tr>
-                <tr  class="table-bordered">
+
+                <tr>
                     <th>Customer ID</th>
-                    <td>@resource.Offer</td>
-                </tr>*@
+                    <td>@offerModel.ForeignKey1_.Costumor_Id</td>
+                </tr>
 
             }
 
         </table>
 
         @*<section class="col-3">
-            BRUG DEN HER PLADS, HVIS NØDVENDIGT ELLER SLET
-        </section>*@
+                BRUG DEN HER PLADS, HVIS NØDVENDIGT ELLER SLET
+            </section>*@
 
     </section>
 
     <section class="row mb-3">
-        
-        <section>
 
+        <section>
         </section>
 
         <section class="container text-center col-6">
 
-            <button type="submit" class="btn btn-lg btn-block btn-outline-primary">
-                Print this
-            </button>
-        
-            <button type="submit" class="btn btn-lg btn-block btn-outline-primary">
+            <form asp-action="PrintOffer">
+                <button type="submit" id="btnPdf" class="btn btn-lg btn-block btn-outline-primary btn-sm">
+                    Print this
+                </button>
+            </form>
+
+
+            <a class="btn btn-lg btn-block btn-outline-primary btn-sm" href="mailto:YourEmail@example.com?subject=Your Offer &body=hiii">
+                @* ?subject gør at man kan ændre i titel ved mailen. &body gør at man kan ændre i hvad der skal stå i mailen.
+                    &cc gør det muligt at tilføje en kontakt. &bcc gør det muligt at tiføje endnu en kontakt*@
                 E-mail this
-                <a href="mailto:"></a>
-            </button>
+            </a>
 
         </section>
-        
-        <section>
 
+        <section>
         </section>
 
     </section>
 }
 
-
+@section Scripts
+{
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $("#Filter").click({
+                source: "api/Allan_Temp_API/Search"
+            })
+        })
+    </script>
+    
+    <script type="text/javascript">
+        $("#btnPdf").click(function() {
+            window.open('../Print/PrintOffer', "_blank");
+        });
+    </script>
+}

@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Raunstrup_Webapplication.Models.OfferModel>
+﻿@model Raunstrup_Webapplication.ViewModel.ViggoViweModel
 
 @{
-    ViewData["Title"] = "Report";
+    ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
@@ -22,12 +22,12 @@
 <h1>Report</h1>
 
 <!--Input forms-->
-<form>
+<form asp-action="Details">
     <label for="Employee_ID">Employee ID</label>
     <input type="number" id="Employee_ID" name="Employee_ID" style="margin: 10px" min="1">
     <label for="Offer_ID">Offer ID</label>
-    <input type="number" id="Offer_ID" name="Offer_ID" style="margin: 10px" min="1">
-    <button type="button" onclick="">Search</button>
+    <input type="number" id="Search" name="id" style="margin: 10px" min="1">
+    <button class="btn btn-primary" type="submit">Search</button>
 </form>
 
 <!--Search function-->
@@ -37,27 +37,16 @@
     </select>
 </form>
 
-<!--Table view-->
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-               
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                  
-                </td>
-                <td>
-
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+@section Scripts
+{
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+            crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $("#Search").autocomplete({
+                source: "Controllers/ReportController/Details"
+            })
+        })
+    </script>
+}
