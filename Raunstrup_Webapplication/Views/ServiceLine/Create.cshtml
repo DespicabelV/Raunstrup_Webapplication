@@ -1,0 +1,95 @@
+﻿@model Raunstrup_Webapplication.ViewModel.ServiceLineViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>Create</h1>
+
+<h4>Service Line</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div class="form-group">
+                <label asp-for="ServiceLineModel.ForeignKey1_.Res_ID" class="control-label"></label>
+                @Html.DropDownList("SelectResource", new SelectList(Model.ResourceModel.Select(x => x.Res_ID)))
+            </div>
+            <div class="form-group">
+                <label asp-for="ServiceLineModel.ForeignKey2_.Service_ID" class="control-label"></label>
+                @Html.DropDownList("SelectService", new SelectList(Model.ServiceLineModels.Select(x => x.Service_Line_ID)))
+            </div>
+            <div class="form-group">
+                <label asp-for="ServiceLineModel.Resource_Quantity" class="control-label"></label>
+                <input asp-for="ServiceLineModel.Resource_Quantity" class="form-control" />
+                <span asp-validation-for="ServiceLineModel.Resource_Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ServiceLineModel.Added_Quantity" class="control-label"></label>
+                <input asp-for="ServiceLineModel.Added_Quantity" class="form-control" />
+                <span asp-validation-for="ServiceLineModel.Added_Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployeeOfferModel.EmployeeOffer_ID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployeeOfferModel.ForeignKey2_.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployeeOfferModel.ForeignKey1_.Offer_ID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployeeOfferModel.ForeignKey2_.Expertise)
+                    </th>
+                    <th>
+                        Add to Task
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.EmployeeOfferModels)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeOffer_ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ForeignKey2_.Name)
+                        </td>
+                        <td>
+                            @Html.DropDownList("Tasks", new SelectList(Model.OfferModel.Select(x => x.Offer_ID)))
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ForeignKey2_.Expertise)
+                        </td>
+                        <td>
+                            <div class="custom-checkbox"></div>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
