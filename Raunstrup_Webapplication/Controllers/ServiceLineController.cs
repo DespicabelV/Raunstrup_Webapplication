@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Raunstrup_Webapplication.Data;
 using Raunstrup_Webapplication.Models;
+using Raunstrup_Webapplication.ViewModel;
 
 namespace Raunstrup_Webapplication.Controllers
 {
@@ -22,7 +23,22 @@ namespace Raunstrup_Webapplication.Controllers
         // GET: ServiceLine
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ServiceLineModel.ToListAsync());
+            var serviceLineModels = _context.ServiceLineModel.ToList();
+            var serviceModel = _context.ServiceModel.ToList();
+            var resourceModel = _context.ResourceModel.ToList();
+            var offerModel = _context.OfferModel.ToList();
+            var employeeOffersModels = _context.EmployeeOfferModel.ToList();
+
+            var viewModel = new ServiceLineViewModel
+            {
+                ServiceLineModels = serviceLineModels,
+                OfferModel = offerModel,
+                ServiceModel = serviceModel,
+                ResourceModel = resourceModel,
+                EmployeeOfferModels = employeeOffersModels
+            };
+
+            return View(viewModel);
         }
 
         // GET: ServiceLine/Details/5
@@ -46,7 +62,24 @@ namespace Raunstrup_Webapplication.Controllers
         // GET: ServiceLine/Create
         public IActionResult Create()
         {
-            return View();
+            var serviceLineModels = _context.ServiceLineModel.ToList();
+            var serviceModel = _context.ServiceModel.ToList();
+            var resourceModel = _context.ResourceModel.ToList();
+            var offerModel = _context.OfferModel.ToList();
+            var employeeOffersModels = _context.EmployeeOfferModel.ToList();
+            var employeeModels = _context.EmployeeModel.ToList();
+            
+
+            var viewModel = new ServiceLineViewModel
+            {
+                ServiceLineModels = serviceLineModels,
+                OfferModel = offerModel,
+                ServiceModel = serviceModel,
+                ResourceModel = resourceModel,
+                EmployeeOfferModels = employeeOffersModels,
+                EmployeeModels = employeeModels
+            };
+            return View(viewModel);
         }
 
         // POST: ServiceLine/Create

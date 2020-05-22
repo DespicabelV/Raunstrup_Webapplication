@@ -23,7 +23,7 @@ namespace Raunstrup_Webapplication.API
 
         [Produces("application/json")]
         [HttpGet("Search")]
-        public async Task<IActionResult> Search()
+        public IActionResult Search()
         {
             try
             {

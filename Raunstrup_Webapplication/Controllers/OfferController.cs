@@ -20,7 +20,7 @@ namespace Raunstrup_Webapplication.Controllers
         }
 
         // GET: Offer
-        public async Task<IActionResult> Index(string OfferName)
+        public IActionResult Index(string OfferName)
         {
             if (OfferName != null)
             {
@@ -29,7 +29,7 @@ namespace Raunstrup_Webapplication.Controllers
             }
             else
             {
-                return View(await _context.OfferModel.ToListAsync());
+                return View(_context.OfferModel.ToList());
             }
         }
 
