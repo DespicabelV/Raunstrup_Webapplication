@@ -1,12 +1,9 @@
-﻿@model IEnumerable<Raunstrup_Webapplication.Models.OrderModel>
-
+﻿@model Raunstrup_Webapplication.ViewModel.JacobViewModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h1>Index</h1>
-
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -14,16 +11,26 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                @Html.DisplayNameFor(model => model.Order.Order_ID)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order.ForeignKey1_.Offer_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order.ForeignKey2_.Costumor_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order.Price)
+            </th>
+            
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model.OrderModels)
+    {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Order_ID">Edit</a> |
@@ -31,6 +38,6 @@
                 <a asp-action="Delete" asp-route-id="@item.Order_ID">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Raunstrup_Webapplication.Data;
 using Raunstrup_Webapplication.Models;
+using Raunstrup_Webapplication.ViewModel;
 
 namespace Raunstrup_Webapplication.Controllers
 {
@@ -18,11 +19,23 @@ namespace Raunstrup_Webapplication.Controllers
         {
             _context = context;
         }
-
+        
         // GET: Order
         public async Task<IActionResult> Index()
         {
-            return View(await _context.OrderModel.ToListAsync());
+            var order= _context.OrderModel.ToList();
+            var offer = _context.OfferModel.ToList();
+            var customer = _context.CustomerModel.ToList();
+
+            var Viewmodel = new JacobViewModel
+            {
+                OrderModels = order,
+                OfferModels = offer,
+                CustomerModels = customer
+
+            };
+
+            return View(Viewmodel);
         }
 
         // GET: Order/Details/5

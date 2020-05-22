@@ -6,13 +6,12 @@
     <title>@ViewData["Title"] - Raunstrup_Webapplication</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    
 </head>
 <body>
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Raunstrup</a>
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/Raunstruplogo.png" /> </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -21,10 +20,7 @@
                 <partial name="_LoginPartial" />
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item"> 
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">About Us</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Offer" asp-action="Index">Offer</a>
@@ -38,16 +34,16 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Report" asp-action="Index">Report</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">Order</a>
+                    </li>
 
                 </ul>
             </div>
         </div>
     </nav>
 </header>
-<div title="background image" class="img">
-    <img src="C:\Users\jacob\source\repos\DespicabelV\Raunstrup_Webapplication\Raunstrup_Webapplication\wwwroot\lib\Images\Raunstruplogo.png" width="150" height="150"/>
 
-</div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -55,9 +51,22 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - Raunstrup - Gruppeopgave 3. semester - Allan, Viggo, Nichlas og Jacob  - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+        
+            <section class="row">
+        <section class="col-10" >
+            <p>
+                 2020 - Raunstrup - Gruppeopgave 3. semester - Allan, Viggo, Nichlas og Jacob
+            </p>
+        </section>
+                <section class="col-2">
+                    <p>
+                    <a href="tel:87 120 120" target="_blank"> call us up!</a>
+                    <a href="mailto:mail@raunstrup.com " target="_blank"> Send us an Email!</a>
+                    <a href="https://www.linkedin.com/company/raunstrup-t-mrer" target="_blank"> Follow us on Linkedin!</a>
+                    </p>
+                </section>
+        </section> 
+
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
