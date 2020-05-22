@@ -21,86 +21,27 @@ namespace Raunstrup_Webapplication.API
             _context = context;
         }
 
-        // GET: api/Nichlas_Temp_API
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<OfferModel>>> GetOfferModel()
+        [Produces("application/json")]
+        [HttpGet("Search")]
+        public async Task<IActionResult> Search()
         {
-            return await _context.OfferModel.Include(c => c.Status).ToListAsync();
-        }
-
-        // GET: api/Nichlas_Temp_API/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<OfferModel>> GetOfferModel(int id)
-        {
-            var offerModel = await _context.OfferModel.FindAsync(id);
-
-            if (offerModel == null)
+            try
             {
-                return NotFound();
+                string Filter = HttpContext.Request.Query["Filter"].ToString();
+                var Titel = _context.OfferModel.Where(o => o.Offer_Title.Contains(Filter))
+                    .Select(o => o.Offer_Title).ToList();
+                return Ok(Titel);
             }
-
-            return offerModel;
-        }
-
-        // PUT: api/Nichlas_Temp_API/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutOfferModel(int id, OfferModel offerModel)
-        {
-            if (id != offerModel.Offer_ID)
+            catch
             {
                 return BadRequest();
             }
-
-            _context.Entry(offerModel).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CustomerModelExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Nichlas_Temp_API
-        [HttpPost]
-        public async Task<ActionResult<OfferModel>> PostOfferModel(OfferModel offerModel)
-        {
-            _context.OfferModel.Add(offerModel);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetOfferModel", new { id = offerModel.Offer_ID }, offerModel);
-        }
-
-        // DELETE: api/Nichlas_Temp_API/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<OfferModel>> DeleteOfferModel(int id)
-        {
-            var offerModel = await _context.OfferModel.FindAsync(id);
-            if (offerModel == null)
-            {
-                return NotFound();
-            }
-
-            _context.OfferModel.Remove(offerModel);
-            await _context.SaveChangesAsync();
-
-            return offerModel;
-        }
-
-        private bool CustomerModelExists(int id)
-        {
-            return _context.CustomerModel.Any(e => e.Costumor_Id == id);
         }
     }
+}
+
+public class BusinessLogicController
+{
+    private readonly ApplicationDbContext _context;
+
 }
