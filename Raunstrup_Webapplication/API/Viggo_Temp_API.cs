@@ -10,7 +10,7 @@ using Raunstrup_Webapplication.Models;
 
 namespace Raunstrup_Webapplication.API
 {
-    [Route("api/[controller]")]
+    [Route("api/ReportController")]
     [ApiController]
     public class Viggo_Temp_API : ControllerBase
     {
@@ -21,30 +21,7 @@ namespace Raunstrup_Webapplication.API
             _context = context;
         }
 
-        // GET: api/Viggo_Temp_API
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<CustomerModel>>> GetCustomerModel()
-        {
-            return await _context.CustomerModel.ToListAsync();
-        }
-
-        // GET: api/Viggo_Temp_API/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<CustomerModel>> GetCustomerModel(int id)
-        {
-            var customerModel = await _context.CustomerModel.FindAsync(id);
-
-            if (customerModel == null)
-            {
-                return NotFound();
-            }
-
-            return customerModel;
-        }
-
         // PUT: api/Viggo_Temp_API/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCustomerModel(int id, CustomerModel customerModel)
         {

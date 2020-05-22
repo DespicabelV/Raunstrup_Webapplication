@@ -20,13 +20,14 @@ namespace Raunstrup_Webapplication.Models
         [Display(Name = "Resource Quantity")]
         public int Resource_Quantity { get; set; }
 
+        [Display(Name = "Quantity Used")]
         public int Used_Quantity { get; set; }
 
+        [Display(Name = "Quantity Added")]
         public int Added_Quantity { get; set; }
 
         [Display(Name = "Service ID")]
         public ServiceModel ForeignKey2_ { get; set; }
-
 
         [Display(Name = "Offer ID")]
         public OfferModel ForeignKey3_ { get; set; }
