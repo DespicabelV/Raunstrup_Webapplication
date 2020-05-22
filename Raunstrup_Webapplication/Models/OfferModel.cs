@@ -17,10 +17,12 @@ namespace Raunstrup_Webapplication.Models
         [Display(Name = "Offer Title")]
         public string Offer_Title { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:d}")]
         [Display(Name = "Start Date")]
         [DataType(DataType.Date)]
         public DateTime Start_date { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:d}")]
         [Display(Name = "End Date")]
         [DataType(DataType.Date)]
         public DateTime End_Date { get; set; }

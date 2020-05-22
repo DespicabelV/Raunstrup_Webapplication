@@ -1,10 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Raunstrup_Webapplication.Data;
+using Raunstrup_Webapplication.Models;
+using Raunstrup_Webapplication.ViewModel;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Raunstrup_Webapplication.Controllers
 {
@@ -22,22 +26,44 @@ namespace Raunstrup_Webapplication.Controllers
             return View();
         }
 
-        // GET: Report/Details/5
+
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            var serviceModel = _context.ServiceModel.ToList();
+            var offerModel = _context.OfferModel.ToList();
+            var resourceModel = _context.ResourceModel.ToList();
+            var employeeModel = _context.EmployeeModel.ToList();
+            var employeeOfferModel = _context.EmployeeOfferModel.ToList();
+            var customerModel = _context.CustomerModel.ToList();
+
+            var serviceLineModels = _context.ServiceLineModel.Where(a => a.ForeignKey3_.Offer_ID == id).ToList();
+            var employeeOfferModels = _context.EmployeeOfferModel.Where(a => a.ForeignKey1_.Offer_ID == id).ToList();
+            var offermodels = _context.OfferModel.Where(a => a.Offer_ID == id).ToList();
+
+            var resourceModels = new List<ResourceModel>();
+            var employeeModels = new List<EmployeeModel>();
+
+            foreach (var item in serviceLineModels)
             {
-                return NotFound();
+                resourceModels.Add(_context.ResourceModel.FirstOrDefault(m => m.Res_ID == item.ForeignKey1_.Res_ID));
             }
 
-            var reportModel = await _context.OfferModel
-                .FirstOrDefaultAsync(m => m.Offer_ID == id);
-            if (reportModel == null)
+            foreach (var item in employeeOfferModels)
             {
-                return NotFound();
+                employeeModels.Add(_context.EmployeeModel.FirstOrDefault(m => m.Employee_ID == item.ForeignKey2_.Employee_ID));
             }
 
-            return View(reportModel);
+            var viewModel = new ViggoViweModel
+            {
+                ServiceLineModels = serviceLineModels,
+                ResourceModels = resourceModels,
+                EmployeeOfferModels = employeeOfferModels,
+                EmployeeModels = employeeModels,
+                Offermodels = offermodels
+            };
+
+
+            return View(viewModel);
         }
     }
 }
