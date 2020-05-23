@@ -30,4 +30,11 @@ namespace Raunstrup_Webapplication.ViewModel
 
         public IEnumerable<EmployeeModel> EmployeeModels { get; set; }
     }
+
+    public class OfferViewModel
+    {
+        public IEnumerable<OfferModel> OfferModels { get; set; }
+        public OfferModel OfferModel { get; set; }
+
+    }
 }

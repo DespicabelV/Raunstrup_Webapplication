@@ -32,6 +32,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.ServiceLineModel.Added_Quantity)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceLineModel.Used_Quantity)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -52,6 +55,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Added_Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Used_Quantity)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Service_Line_ID">Edit</a> |

@@ -17,9 +17,11 @@ namespace Raunstrup_Webapplication.Models
 
         public string Name { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:C1}")]
         [Display(Name = "Store Price")]
         public double Store_Price { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:C1}")]
         [Display(Name = "Customer Price")]
         public double Customer_Price { get; set; }
         

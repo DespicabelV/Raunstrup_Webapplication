@@ -1,9 +1,10 @@
-﻿@model IEnumerable<Raunstrup_Webapplication.Models.OfferModel>
+﻿@model Raunstrup_Webapplication.ViewModel.OfferViewModel
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 <h1>Offer</h1>
 
@@ -11,35 +12,35 @@
     <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
 <form asp-action="Index">
-    <input type="text" id="Filter" name="OfferName"/>
+    <input type="text" id="Filter" placeholder="ID" name="OfferId"/>
     <button class="btn btn-primary" type="submit">Search</button>
 </form>
 <table class="table table-striped table-sm">
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Offer_ID)
+            @Html.DisplayNameFor(model => model.OfferModel.Offer_ID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Offer_Title)
+            @Html.DisplayNameFor(model => model.OfferModel.Offer_Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Start_date)
+            @Html.DisplayNameFor(model => model.OfferModel.Start_date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.End_Date)
+            @Html.DisplayNameFor(model => model.OfferModel.End_Date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Offer_Price)
+            @Html.DisplayNameFor(model => model.OfferModel.Offer_Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.OfferModel.Status)
         </th>
         <th></th>
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
+    @foreach (var item in Model.OfferModels)
     {
         <tr>
             <td>
@@ -78,11 +79,18 @@
         src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous"></script>
-    <script>
+    @*<script> Søge funktion til Navne
         $(document).ready(function() {
             $("#Filter").autocomplete({
                 source: "api/Nichlas_Temp_API/Search"
             })
         })
-    </script>   
+    </script>*@   
+    <script>
+        $(document).ready(function () {
+            $("#Filter").click({
+                source: "api/Nichlas_Temp_API/Search"
+            })
+        })
+    </script>
 }

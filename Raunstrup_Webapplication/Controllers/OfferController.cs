@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Raunstrup_Webapplication.Data;
 using Raunstrup_Webapplication.Models;
+using Raunstrup_Webapplication.ViewModel;
 
 namespace Raunstrup_Webapplication.Controllers
 {
@@ -20,17 +21,35 @@ namespace Raunstrup_Webapplication.Controllers
         }
 
         // GET: Offer
-        public IActionResult Index(string OfferName)
+        public IActionResult Index(string OfferID)
         {
-            if (OfferName != null)
+            //Søge Funktion til Navne uden viewmodels
+            //if (OfferName != null)
+            //{
+            //    var Data = _context.OfferModel.Where(o => o.Offer_Title.Contains(OfferName)).ToList();
+            //    return View(Data);
+            //}
+            //else
+            //{
+            //    return View(_context.OfferModel.ToList());
+            //}
+
+
+            if (OfferID == null)
             {
-                var Data = _context.OfferModel.Where(o => o.Offer_Title.Contains(OfferName)).ToList();
-                return View(Data);
+                var offerViewModels = _context.OfferModel.ToList();
+                var viewModel = new OfferViewModel()
+                {
+                    OfferModels = offerViewModels
+                };
+                return View(viewModel);
             }
-            else
+            var offerViewModelsWithID = _context.OfferModel.Where(o => Convert.ToString(o.Offer_ID).Contains(OfferID)).ToList();
+            var viewModelWithID = new OfferViewModel()
             {
-                return View(_context.OfferModel.ToList());
-            }
+                OfferModels = offerViewModelsWithID
+            };
+            return View(viewModelWithID);
         }
 
         // GET: Offer/Details/5

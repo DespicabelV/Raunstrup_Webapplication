@@ -4,6 +4,19 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
 
 
 <h1>Create</h1>
@@ -14,12 +27,17 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div class="form-group">
-                <label asp-for="ServiceLineModel.ForeignKey1_.Res_ID" class="control-label"></label>
-                @Html.DropDownList("SelectResource", new SelectList(Model.ResourceModel.Select(x => x.Res_ID)))
+                <label asp-for="ServiceLineModel.ForeignKey1_.Name" class="control-label"></label>
+                @Html.DropDownListFor(m => m.ServiceLineModel.ForeignKey1_.Res_ID,new SelectList(Model.ResourceModel,"Res_ID","Name","Res_ID"),"---Select Service---",new {@class = "form-group"})
             </div>
             <div class="form-group">
-                <label asp-for="ServiceLineModel.ForeignKey2_.Service_ID" class="control-label"></label>
-                @Html.DropDownList("SelectService", new SelectList(Model.ServiceLineModels.Select(x => x.Service_Line_ID)))
+                <label asp-for="ServiceLineModel.ForeignKey2_.Name" class="control-label"></label>
+                @Html.DropDownListFor(m => m.ServiceLineModel.ForeignKey2_.Service_ID,new SelectList(Model.ServiceModel,"Service_ID","Name","Service_ID"),"---Select Service---",new {@class = "form-group"})
+            </div>
+            <div class="form-group">
+                <label asp-for="ServiceLineModel.ForeignKey3_.Offer_ID" class="control-label"></label>
+                <input asp-for="ServiceLineModel.ForeignKey3_.Offer_ID" class="form-control" />
+                <span asp-validation-for="ServiceLineModel.ForeignKey3_.Offer_ID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ServiceLineModel.Resource_Quantity" class="control-label"></label>
@@ -30,6 +48,11 @@
                 <label asp-for="ServiceLineModel.Added_Quantity" class="control-label"></label>
                 <input asp-for="ServiceLineModel.Added_Quantity" class="form-control" />
                 <span asp-validation-for="ServiceLineModel.Added_Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ServiceLineModel.Used_Quantity" class="control-label"></label>
+                <input asp-for="ServiceLineModel.Used_Quantity" class="form-control" />
+                <span asp-validation-for="ServiceLineModel.Used_Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -85,7 +108,7 @@
     </div>
 
 </div>
-
+@Html.HiddenFor(m => m.ServiceLineModel.Service_Line_ID)
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
