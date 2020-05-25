@@ -1,25 +1,44 @@
-﻿@model Raunstrup_Webapplication.Models.OrderModel
+﻿@model Raunstrup_Webapplication.ViewModel.JacobViewModel
 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>Are you sure you want to commit?</h1>
 
-<div>
-    <h4>OrderModel</h4>
-    <hr />
+<form asp-action="Details">
+    <input type="hidden" asp-for="Offer.Offer_ID" />
+    <input name="id" type="submit" value="Add to Order table" class="btn btn-outline-success" /> |
+    <a class="btn btn-danger" asp-action="Index"> Back to List</a>
+</form>
+
+
+    @*<h4>OrderModel</h4>
+    <hr/>
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Order.Order_ID)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Order.Order_ID)
         </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Order_ID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Order.ForeignKey2_.Costumor_Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Order.ForeignKey2_.Costumor_Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Order.ForeignKey1_.Offer_ID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Order.ForeignKey1_.Offer_ID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Order.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Order.Price)
+        </dd>
+    </dl>*@
