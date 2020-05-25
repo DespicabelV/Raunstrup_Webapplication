@@ -28,6 +28,7 @@ namespace Raunstrup_Webapplication.Models
         public DateTime End_Date { get; set; }
 
         [Display(Name = "Offer Price")]
+        [DisplayFormat(DataFormatString = "{0:C1}")]
         public double Offer_Price { get; set; }
 
         [Display(Name = "Customer ID")]

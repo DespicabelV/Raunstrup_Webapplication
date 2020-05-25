@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Raunstrup_Webapplication.Models;
 using System.Threading.Tasks;
+using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Mvc.Rendering;
+
 
 namespace Raunstrup_Webapplication.ViewModel
 {
@@ -29,5 +31,24 @@ namespace Raunstrup_Webapplication.ViewModel
         public EmployeeOfferModel EmployeeOfferModel { get; set; }
 
         public IEnumerable<EmployeeModel> EmployeeModels { get; set; }
+    }
+
+    public class OfferViewModel
+    {
+        public IEnumerable<OfferModel> OfferModels { get; set; }
+        public OfferModel OfferModel { get; set; }
+        public IEnumerable<CustomerModel> CustomerModels { get; set; }
+        public CustomerModel CustomerModel { get; set; }
+    }
+
+    public class EmployeeOfferViewModel
+    {
+        public IEnumerable<EmployeeOfferModel> EmployeeOfferModels { get; set; }
+        public EmployeeOfferModel EmployeeOfferModel { get; set; }
+        public IEnumerable<EmployeeModel> EmployeeModels { get; set; }
+        public EmployeeModel EmployeeModel { get; set; }
+
+        public IEnumerable<OfferModel> OfferModels { get; set; }
+        public OfferModel OfferModel { get; set; }
     }
 }

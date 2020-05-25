@@ -1,43 +1,122 @@
-﻿@model Raunstrup_Webapplication.ViewModel.JacobViewModel
+﻿@using Raunstrup_Webapplication.ViewModel
+@using Microsoft.CodeAnalysis.CSharp.Syntax
+@model Raunstrup_Webapplication.ViewModel.JacobViewModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h1>Index</h1>
+<h1>List of Orders</h1>
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table" >
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Order.Order_ID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order.ForeignKey1_.Offer_ID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order.ForeignKey2_.Costumor_Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order.Price)
-            </th>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Order.Order_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Order.ForeignKey1_.Offer_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Order.ForeignKey2_.Costumor_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Order.Price)
+        </th>
             
-        </tr>
+    </tr>
     </thead>
     <tbody>
     @foreach (var item in Model.OrderModels)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item)
+                @Html.DisplayFor(modelItem => item.Order_ID)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Order_ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Order_ID">Details</a> |
+                @Html.DisplayFor(modelItem => item.ForeignKey1_.Offer_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ForeignKey2_.Costumor_Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Order_ID"> Details</a>
                 <a asp-action="Delete" asp-route-id="@item.Order_ID">Delete</a>
             </td>
         </tr>
+
     }
+    </tbody>
+</table>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Offer.Offer_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Offer.ForeignKey1_.Costumor_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Offer.Offer_Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Offer.Start_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Offer.End_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Offer.Offer_Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Offer.Status)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OfferModels)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Offer_ID)
+                </td> 
+                <td>
+                    @Html.DisplayFor(modelItem => item.ForeignKey1_.Costumor_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Offer_Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Start_date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.End_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Offer_Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @if (item.Status=="Completed" ||item.Status== "completed")
+                    {
+                        <a asp-action="Details" asp-controller="Order"> Add to order table</a>
+                        <a asp-action="Delete" asp-route-id="@item.Offer_ID">Delete</a>
+                    }
+                    else
+                    {
+                        
+                    <a asp-action="Delete" asp-route-id="@item.Offer_ID">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

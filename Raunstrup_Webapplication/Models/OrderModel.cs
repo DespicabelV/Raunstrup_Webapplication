@@ -12,11 +12,10 @@ namespace Raunstrup_Webapplication.Models
         [Required] [Key]
         [Display(Name = "Order ID")]
         public int Order_ID { get; set; }
-
-
         [Display(Name = "Offer ID")]
         public OfferModel ForeignKey1_ { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:C1}")]
         public double Price { get; set; }
 
         [Display(Name = "Customer ID")]

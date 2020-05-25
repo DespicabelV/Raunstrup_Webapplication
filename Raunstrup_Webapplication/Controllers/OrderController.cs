@@ -38,28 +38,66 @@ namespace Raunstrup_Webapplication.Controllers
             return View(Viewmodel);
         }
 
-        // GET: Order/Details/5
-        public async Task<IActionResult> Details(int? id)
+        //GET: Order/Details/5
+        public async Task<IActionResult> Details(int id, [Bind("Offer.Offer_ID")] JacobViewModel viewModel)
         {
-            if (id == null)
+            var orderModel = new OrderModel()
             {
-                return NotFound();
-            }
+                ForeignKey2_ = viewModel.Order.ForeignKey2_,
+                ForeignKey1_ =viewModel.Order.ForeignKey1_,
+                Price = viewModel.Order.Price
+            };
+            var Offerid = _context.OfferModel.Find(id);
+            var CustomerID = _context.CustomerModel.Find(viewModel.Order.ForeignKey2_.Costumor_Id);
 
-            var orderModel = await _context.OrderModel
-                .FirstOrDefaultAsync(m => m.Order_ID == id);
-            if (orderModel == null)
-            {
-                return NotFound();
-            }
+            orderModel.ForeignKey2_ = CustomerID;
+            orderModel.ForeignKey1_ = Offerid;
 
-            return View(orderModel);
+            _context.OrderModel.Add(orderModel);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
+        //public async Task<IActionResult> Details(int? id)
+        //{
+
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var offer = _context.OfferModel.ToList();
+        //    var customer = _context.CustomerModel.ToList();
+        //    var order = _context.OrderModel.Where(o => o.Order_ID== id).ToList();
+
+
+
+        //    var Viewmodel = new JacobViewModel
+        //    {
+        //        OrderModels = order,
+        //        OfferModels = offer,
+        //        CustomerModels = customer
+
+
+        //    };
+
+        //    return View(Viewmodel);
+        //}
 
         // GET: Order/Create
         public IActionResult Create()
         {
-            return View();
+            var order = _context.OrderModel.ToList();
+            var offer = _context.OfferModel.ToList();
+            var customer = _context.CustomerModel.ToList();
+
+            var Viewmodel = new JacobViewModel
+            {
+                OrderModels = order,
+                OfferModels = offer,
+                CustomerModels = customer
+
+            };
+            return View(Viewmodel);
         }
 
         // POST: Order/Create
@@ -67,15 +105,23 @@ namespace Raunstrup_Webapplication.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Order_ID,Price")] OrderModel orderModel)
+        public async Task<IActionResult> Create(JacobViewModel viewModel)
         {
-            if (ModelState.IsValid)
+            var orderModel = new OrderModel
             {
-                _context.Add(orderModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(orderModel);
+                    ForeignKey2_ = viewModel.Order.ForeignKey2_,
+                    ForeignKey1_ = viewModel.Order.ForeignKey1_,
+                    Price = viewModel.Order.Price
+            }; 
+           var CustomerID = _context.CustomerModel.Find(viewModel.Order.ForeignKey2_.Costumor_Id);
+           var OfferID = _context.OfferModel.Find(viewModel.Order.ForeignKey1_.Offer_ID);
+
+           orderModel.ForeignKey2_ = CustomerID;
+           orderModel.ForeignKey1_ = OfferID;
+           
+           _context.OrderModel.Add(orderModel); 
+           await _context.SaveChangesAsync(); 
+           return RedirectToAction(nameof(Index));
         }
 
         // GET: Order/Edit/5
@@ -108,22 +154,9 @@ namespace Raunstrup_Webapplication.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
+                
                     _context.Update(orderModel);
                     await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!OrderModelExists(orderModel.Order_ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
                 return RedirectToAction(nameof(Index));
             }
             return View(orderModel);
