@@ -1,15 +1,29 @@
 ﻿@using Raunstrup_Webapplication.ViewModel
 @using Microsoft.CodeAnalysis.CSharp.Syntax
-@model Raunstrup_Webapplication.ViewModel.JacobViewModel
+@model Raunstrup_Webapplication.ViewModel.OrderViewModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
 <h1>List of Orders</h1>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
-<table class="table" >
+<table class="table">
     <thead>
     <tr>
         <th>
@@ -24,7 +38,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Order.Price)
         </th>
-            
     </tr>
     </thead>
     <tbody>
@@ -43,16 +56,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
-            
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Order_ID"> Details</a>
-                <a asp-action="Delete" asp-route-id="@item.Order_ID">Delete</a>
-            </td>
         </tr>
 
     }
     </tbody>
 </table>
+<h3> List of Pending Offers</h3>
 <table class="table">
     <thead>
         <tr>
@@ -85,7 +94,7 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Offer_ID)
-                </td> 
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ForeignKey1_.Costumor_Id)
                 </td>
@@ -105,16 +114,6 @@
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td>
-                    @if (item.Status=="Completed" ||item.Status== "completed")
-                    {
-                        <a asp-action="Details" asp-controller="Order"> Add to order table</a>
-                        <a asp-action="Delete" asp-route-id="@item.Offer_ID">Delete</a>
-                    }
-                    else
-                    {
-                        
-                    <a asp-action="Delete" asp-route-id="@item.Offer_ID">Delete</a>
-                    }
                 </td>
             </tr>
         }

@@ -105,35 +105,6 @@ namespace Raunstrup_Webapplication.Controllers
             return RedirectToAction("Create", "ServiceLine");
 
         }
-        // GET: Offer/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var offerModel = await _context.OfferModel
-                .FirstOrDefaultAsync(m => m.Offer_ID == id);
-            if (offerModel == null)
-            {
-                return NotFound();
-            }
-
-            return View(offerModel);
-        }
-
-        // POST: Offer/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var offerModel = await _context.OfferModel.FindAsync(id);
-            _context.OfferModel.Remove(offerModel);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
         private bool OfferModelExists(int id)
         {
             return _context.OfferModel.Any(e => e.Offer_ID == id);

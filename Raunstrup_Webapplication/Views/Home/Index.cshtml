@@ -1,121 +1,114 @@
 ﻿@{
     ViewData["Title"] = "Raunstrup A/S --- HomePage";
 }
-<head>
-    <!--
-    Noter til mig selv. Kig inde på raunstrups hjemmeside i forhold til opbygning, men også hvordan at de har valgt at opsætte det over i deres kode på HTML filen. 
-    --> 
-</head>
-
 <body>
-<article title="Top of Page">
-    <section title="Headline and text">
-        <h1 style="color:darkblue">
-            Welcome to Raunstrup A/S
-        </h1>
-        <hr style="color: darkblue">
+    <article title="Top of Page">
+        <section title="Headline and text">
+            <h1 style="color:darkblue">
+                Welcome to Raunstrup A/S
+            </h1>
+            <hr style="color: darkblue">
 
-        <article class="row" title="Start text">
-            <section>
+            <article class="row" title="Start text">
+                <section>
+                    <p>
+                        Raunstrup is a carpenter business with many connections around in Denmark, such as in Odense and Copenhagen, but the Headquarters are located in Aarhus.
+                    </p>
+                </section>
+            </article>
+            <section class="text-info" title="How to use">
+                <b>
+                    How to use the website:
+                </b>
+            </section>
+            <br />
+            <section class="row">
+                <ul class="list-group-item" title="How to use website">
+                    <li title="first">
+                        First you need to sign up on the website, so that we may get some details about you.
+                    </li>
+                    <li title="second">
+                        Secondly, you need to contact the a department and get an employee to make a status report on the service you would like of us to provide
+                        our contact details are displayed at the bottom of the page.
+                    </li>
+                    <li title="third">
+                        Thirdly and lastly, you will be send an offer by mail about the services that we can provide.
+                    </li>
+                </ul>
+            </section>
+            <br />
+            <section class="row">
+                <p class="col-3">
+
+                    <i>
+                        Need a job done?
+                    </i>
+                    <b>
+                        <a class="nav-link" asp-area="" asp-controller="Offer" asp-action="Index">Click Here to create an Offer.</a>
+                    </b>
+                </p>
+                <p class="col col-2">
+                    <b>
+                        OR
+                    </b>
+                </p>
                 <p>
-                    Raunstrup is a carpenter business with many connections around in Denmark, such as in Odense and Copenhagen, but the Headquarters are located in Aarhus.
+                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Register an account</a>
+                </p>
+                <p>
+                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Log in</a>
                 </p>
             </section>
-            
-        </article>
-        <section class="text-info" title="How to use">
-            <b>
-                How to use the website:
-            </b>
         </section>
-        <br/>
-        <section class="row">
-            <ul class="list-group-item" title="How to use website" >
-                <li title="first"> 
-                    First you need to sign up on the website, so that we may get some details about you.
-                </li>
-                <li title="second"> 
-                    Secondly, you need to contact the a department and get an employee to make a status report on the service you would like of us to provide
-                    our contact details are displayed at the bottom of the page. 
-                </li>
-                <li title="third">
-                    Thirdly and lastly, you will be send an offer by mail about the services that we can provide. 
-                </li>
-            </ul>
-        </section>
-        <br/>
-        <section class="row">
-            <p class="col-3">
-
-                <i>
-                    Need a job done?
-                </i>
-                <b>
-                    <a class="nav-link" asp-area="" asp-controller="Offer" asp-action="Index">Click Here to create an Offer.</a>
-                </b>
-            </p>
-            <p class="col col-2">
-                <b>
-                    OR
-                </b>
-            </p>
-            <p>
-                <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Register an account</a>
-            </p>
-            <p>
-                <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Log in</a>
-            </p>
-        </section>
-    </section>
-</article>
-<br/>
+    </article>
+    <br />
     <article class="container">
         <p>
-        <i>
-            All the different departments of Raunstrup A/S are advertising protected and this means that the brand must not be used for commercial purpose.
-        </i>
+            <i>
+                All the different departments of Raunstrup A/S are advertising protected and this means that the brand must not be used for commercial purpose.
+            </i>
         </p>
         <section class="row" title="Departments in Jylland">
             <p class="col-3">
                 <b>
                     RAUNSTRUP A/S
                 </b>
-                <br/>
+                <br />
                 Robert Fultons Vej 22
-                <br/>
+                <br />
                 8200 Aarhus N
-                <br/>
+                <br />
                 CVR-nr.: 3552 2506
             </p>
             <p class="col col-3">
                 <b>
                     RAUNSTRUP BYGGERI A/S
-                </b> 
-                <br/>
+                </b>
+                <br />
                 Robert Fultons Vej 22
-                <br/>
+                <br />
                 8200 Aarhus N
-                <br/>
+                <br />
                 CVR-nr.: 1692 9409
-                <br/>
+                <br />
                 EAN-nr.: 5790002191657
             </p>
             <p class="col col-3">
                 <b>
                     RANDERS
                 </b>
-                <br/>
+                <br />
                 Argerskellet 48
-                <br/>
+                <br />
                 8920 Randers NV
             </p>
             <p class="col col-3">
                 <b>
                     VEJLE
                 </b>
-                <br/>
+                <br />
                 Karetmagervej 10B
-                <br/>
+                <br />
                 7100 Vejle
             </p>
         </section>
