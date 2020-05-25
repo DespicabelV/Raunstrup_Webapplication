@@ -6,7 +6,7 @@ using Raunstrup_Webapplication.Models;
 
 namespace Raunstrup_Webapplication.ViewModel
 {
-    public class ViggoViweModel
+    public class ReportViewModel
     {
         public ServiceLineModel ServiceLineModel { get; set; }
         public ResourceModel ResourceModel { get; set; }
@@ -19,5 +19,4 @@ namespace Raunstrup_Webapplication.ViewModel
         public List<EmployeeOfferModel> EmployeeOfferModels { get; set; }
         public List<OfferModel> Offermodels { get; set; }
     }
-
 }

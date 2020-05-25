@@ -1,15 +1,12 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Raunstrup_Webapplication.API;
 using Raunstrup_Webapplication.Data;
 using Raunstrup_Webapplication.Models;
 using Raunstrup_Webapplication.ViewModel;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Raunstrup_Webapplication.API;
 
 namespace Raunstrup_Webapplication.Controllers
 {
@@ -26,7 +23,6 @@ namespace Raunstrup_Webapplication.Controllers
         {
             return View();
         }
-
 
         public IActionResult Details(int? id)
         {
@@ -54,7 +50,7 @@ namespace Raunstrup_Webapplication.Controllers
                 employeeModels.Add(_context.EmployeeModel.FirstOrDefault(m => m.Employee_ID == item.ForeignKey2_.Employee_ID));
             }
 
-            var viewModel = new ViggoViweModel
+            var viewModel = new ReportViewModel()
             {
                 ServiceLineModels = serviceLineModels,
                 ResourceModels = resourceModels,
@@ -63,26 +59,26 @@ namespace Raunstrup_Webapplication.Controllers
                 Offermodels = offermodels
             };
 
-
             return View(viewModel);
         }
 
         public async Task<IActionResult> ReportDetails(int[] resArray, int[] hoursArray)
         {
-            Viggo_Temp_API test = new Viggo_Temp_API(_context);
+            ServiceLine_APIController ServiceLine_API = new ServiceLine_APIController(_context);
+            EmployeeOffer_APIController employeeOffer_Api = new EmployeeOffer_APIController(_context);
 
-            for (int i = 0; i < resArray.Length; i = i+2)
+            for (int i = 0; i < resArray.Length; i = i + 2)
             {
                 var data = await _context.ServiceLineModel.FirstOrDefaultAsync(m => m.Service_Line_ID == resArray[i]);
                 data.Used_Quantity = data.Used_Quantity + resArray[i + 1];
-                await test.PutServiceLineModel(resArray[i], data);
+                await ServiceLine_API.PutServiceLineModel(resArray[i], data);
             }
 
             for (int i = 0; i < hoursArray.Length; i = i + 2)
             {
                 var data = await _context.EmployeeOfferModel.FirstOrDefaultAsync(m => m.EmployeeOffer_ID == hoursArray[i]);
                 data.HoursWorked = data.HoursWorked + hoursArray[i + 1];
-                await test.PutEmployeeOfferModel(hoursArray[i], data);
+                await employeeOffer_Api.PutEmployeeOfferModel(hoursArray[i], data);
             }
 
             return Accepted();
