@@ -10,10 +10,6 @@
 <p>
     <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
-@*<form asp-action="Index">
-    <input type="text" id="Filter" name="ServiceName" />
-    <button class="btn btn-primary" type="submit">Search</button>
-</form>*@
 <table class="table table-striped table-sm">
     <thead>
         <tr>
@@ -31,6 +27,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ServiceLineModel.Added_Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceLineModel.Used_Quantity)
             </th>
         </tr>
     </thead>
@@ -54,7 +53,9 @@
                     @Html.DisplayFor(modelItem => item.Added_Quantity)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Service_Line_ID">Edit</a> |
+                    @Html.DisplayFor(modelItem => item.Used_Quantity)
+                </td>
+                <td>
                     <a asp-action="Details" asp-route-id="@item.Service_Line_ID">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Service_Line_ID">Delete</a>
                 </td>
@@ -62,19 +63,3 @@
         }
     </tbody>
 </table>
-
-
-
-@*@section Scripts
-{
-    <script src="https://code.jquery.com/jquery-3.5.1.js"
-            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-            crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function() {
-            $("#Filter").autocomplete({
-                source: "api/Nichlas_Temp_API/Search"
-            })
-        })
-    </script>
-}*@

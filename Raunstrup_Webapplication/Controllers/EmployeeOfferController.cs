@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Raunstrup_Webapplication.API;
 using Raunstrup_Webapplication.Data;
 using Raunstrup_Webapplication.Models;
+using Raunstrup_Webapplication.ViewModel;
 
 namespace Raunstrup_Webapplication.Controllers
 {
@@ -46,7 +48,16 @@ namespace Raunstrup_Webapplication.Controllers
         // GET: EmployeeOffer/Create
         public IActionResult Create()
         {
-            return View();
+            var employeeModels = _context.EmployeeModel.ToList();
+            var offerModels = _context.OfferModel.ToList();
+            var employeeOfferModels = _context.EmployeeOfferModel.ToList();
+            var viewModel = new EmployeeOfferViewModel
+            {
+                EmployeeModels = employeeModels,
+                OfferModels = offerModels,
+                EmployeeOfferModels = employeeOfferModels
+            };
+            return View(viewModel);
         }
 
         // POST: EmployeeOffer/Create
@@ -54,15 +65,25 @@ namespace Raunstrup_Webapplication.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmployeeOffer_ID")] EmployeeOfferModel employeeOfferModel)
+        public async Task<IActionResult> Create(EmployeeOfferViewModel employeeOfferViewModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(employeeOfferModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var employeeOfferModel = new EmployeeOfferModel
+                {
+                    HoursWorked = employeeOfferViewModel.EmployeeOfferModel.HoursWorked,
+                    ForeignKey1_ = employeeOfferViewModel.EmployeeOfferModel.ForeignKey1_,
+                    ForeignKey2_ = employeeOfferViewModel.EmployeeOfferModel.ForeignKey2_,
+                };
+                var offerID =  _context.OfferModel.Find(employeeOfferViewModel.EmployeeOfferModel.ForeignKey1_.Offer_ID);
+                var EmployeeID = _context.EmployeeModel.Find(employeeOfferViewModel.EmployeeOfferModel.ForeignKey2_.Employee_ID);
+                employeeOfferModel.ForeignKey1_ = offerID;
+                employeeOfferModel.ForeignKey2_ = EmployeeID;
+
+                Nichlas_Temp_API api = new Nichlas_Temp_API(_context);
+                await api.PostEmployeeOfferModel(employeeOfferModel);
             }
-            return View(employeeOfferModel);
+            return RedirectToAction("Create", "ServiceLine");
         }
 
         // GET: EmployeeOffer/Edit/5

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -77,7 +78,7 @@ namespace Raunstrup_Webapplication.Controllers
                 ServiceModel = serviceModel,
                 ResourceModel = resourceModel,
                 EmployeeOfferModels = employeeOffersModels,
-                EmployeeModels = employeeModels
+                EmployeeModels = employeeModels,
             };
             return View(viewModel);
         }
@@ -87,18 +88,37 @@ namespace Raunstrup_Webapplication.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Service_Line_ID,Resource_Quantity")] ServiceLineModel serviceLineModel)
+        public async Task<IActionResult> Create(ServiceLineViewModel serviceLineViewModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(serviceLineModel);
+                var serviceLineModel = new ServiceLineModel
+                {
+                    ForeignKey2_ = serviceLineViewModel.ServiceLineModel.ForeignKey2_,
+                    ForeignKey1_ = serviceLineViewModel.ServiceLineModel.ForeignKey1_,
+                    ForeignKey3_ = serviceLineViewModel.ServiceLineModel.ForeignKey3_,
+                    Added_Quantity = serviceLineViewModel.ServiceLineModel.Added_Quantity,
+                    Used_Quantity = serviceLineViewModel.ServiceLineModel.Used_Quantity,
+                    Resource_Quantity = serviceLineViewModel.ServiceLineModel.Resource_Quantity
+                };
+
+                var serviceID =
+                    _context.ServiceModel.Find(serviceLineViewModel.ServiceLineModel.ForeignKey2_.Service_ID);
+                var resID = _context.ResourceModel.Find(serviceLineViewModel.ServiceLineModel.ForeignKey1_.Res_ID);
+                var offerID = _context.OfferModel.Find(serviceLineViewModel.ServiceLineModel.ForeignKey3_.Offer_ID);
+                serviceLineModel.ForeignKey2_ = serviceID;
+                serviceLineModel.ForeignKey1_ = resID;
+                serviceLineModel.ForeignKey3_ = offerID;
+
+                _context.ServiceLineModel.Add(serviceLineModel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create");
             }
-            return View(serviceLineModel);
+
+            return RedirectToAction("Create");
         }
 
-        // GET: ServiceLine/Edit/5
+        // GET: ServiceLine/Edit/5 
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
