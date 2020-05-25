@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -77,7 +78,7 @@ namespace Raunstrup_Webapplication.Controllers
                 ServiceModel = serviceModel,
                 ResourceModel = resourceModel,
                 EmployeeOfferModels = employeeOffersModels,
-                EmployeeModels = employeeModels
+                EmployeeModels = employeeModels,
             };
             return View(viewModel);
         }
@@ -87,8 +88,7 @@ namespace Raunstrup_Webapplication.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("Service_Line_ID,ForeignKey1_,Resource_Quantity,ForeignKey2_,ForeignKey3_,Added_Quantity, Used_Quantity")] ServiceLineModel serviceLineModel)
-        public async Task<IActionResult> Create( ServiceLineViewModel serviceLineViewModel)
+        public async Task<IActionResult> Create(ServiceLineViewModel serviceLineViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -112,12 +112,13 @@ namespace Raunstrup_Webapplication.Controllers
 
                 _context.ServiceLineModel.Add(serviceLineModel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create");
             }
-            return View();
+
+            return RedirectToAction("Create");
         }
 
-        // GET: ServiceLine/Edit/5
+        // GET: ServiceLine/Edit/5 
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
