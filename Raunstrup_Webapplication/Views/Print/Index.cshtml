@@ -1,4 +1,5 @@
-﻿@model Raunstrup_Webapplication.ViewModel.PrintViewModel
+﻿
+@model Raunstrup_Webapplication.ViewModel.PrintViewModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,7 +8,7 @@
 <h1>Print/E-mail</h1>
 
 <form asp-action="Index">
-    <input type="text" id="Filter" name="OfferID" />
+    <input type="text" id="Filter" name="OfferID" placeholder="Search ID" />
     <button class="btn btn-primary" type="submit">Search</button>
 </form>
 
@@ -55,9 +56,8 @@ else
                     <th>Customer ID</th>
                     <td>@offerModel.ForeignKey1_.Costumor_Id</td>
                 </tr>
-
             }
-
+            
         </table>
 
         @*<section class="col-3">
@@ -74,16 +74,20 @@ else
         <section class="container text-center col-6">
 
             <form asp-action="PrintOffer">
-                <button type="submit" id="btnPdf" class="btn btn-lg btn-block btn-outline-primary btn-sm">
-                    Print this
+                <input type="text" placeholder="ID you want to PDF" id="Filter" name="OfferID"/>
+                <button type="submit" class="btn btn-lg btn-block btn-outline-primary btn-sm">
+                    Print this offer
                 </button>
             </form>
 
-
-            <a class="btn btn-lg btn-block btn-outline-primary btn-sm" href="mailto:YourEmail@example.com?subject=Your Offer &body=hiii">
+                @*<a class="btn btn-lg btn-block btn-outline-primary btn-sm" href="@Model.OfferModel.ForeignKey1_.Email?subject=Your Offer &body=hiii">
+                    E-mail this offer
+                </a>*@
+            
+            <a class="btn btn-lg btn-block btn-outline-primary btn-sm" href="mailto:your-Email?subject=Your Offer &body=hiii">
                 @* ?subject gør at man kan ændre i titel ved mailen. &body gør at man kan ændre i hvad der skal stå i mailen.
                     &cc gør det muligt at tilføje en kontakt. &bcc gør det muligt at tiføje endnu en kontakt*@
-                E-mail this
+                E-mail this offer
             </a>
 
         </section>
@@ -108,8 +112,8 @@ else
     </script>
     
     <script type="text/javascript">
-        $("#btnPdf").click(function() {
-            window.open('../Print/PrintOffer', "_blank");
+        $("#Filter").click(function() {
+            source:"/Print/PrintOffer"
         });
     </script>
 }
