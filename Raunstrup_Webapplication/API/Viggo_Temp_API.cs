@@ -21,16 +21,17 @@ namespace Raunstrup_Webapplication.API
             _context = context;
         }
 
-        // PUT: api/Viggo_Temp_API/5
+        //---------------------------------------------OfferModel API--------------------------------------------
+        // PUT: api/Offer_API/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomerModel(int id, CustomerModel customerModel)
+        public async Task<IActionResult> PutOfferModel(int id, OfferModel offerModel)
         {
-            if (id != customerModel.Costumor_Id)
+            if (id != offerModel.Offer_ID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(customerModel).State = EntityState.Modified;
+            _context.Entry(offerModel).State = EntityState.Modified;
 
             try
             {
@@ -38,7 +39,7 @@ namespace Raunstrup_Webapplication.API
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CustomerModelExists(id))
+                if (!OfferModelExists(id))
                 {
                     return NotFound();
                 }
@@ -51,37 +52,139 @@ namespace Raunstrup_Webapplication.API
             return NoContent();
         }
 
-        // POST: api/Viggo_Temp_API
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<CustomerModel>> PostCustomerModel(CustomerModel customerModel)
+        // GET: api/Offer_API/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<OfferModel>> GetOfferModel(int id)
         {
-            _context.CustomerModel.Add(customerModel);
-            await _context.SaveChangesAsync();
+            var offerModel = await _context.OfferModel.FindAsync(id);
 
-            return CreatedAtAction("GetCustomerModel", new { id = customerModel.Costumor_Id }, customerModel);
-        }
-
-        // DELETE: api/Viggo_Temp_API/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<CustomerModel>> DeleteCustomerModel(int id)
-        {
-            var customerModel = await _context.CustomerModel.FindAsync(id);
-            if (customerModel == null)
+            if (offerModel == null)
             {
                 return NotFound();
             }
 
-            _context.CustomerModel.Remove(customerModel);
-            await _context.SaveChangesAsync();
-
-            return customerModel;
+            return offerModel;
         }
 
-        private bool CustomerModelExists(int id)
+        // DELETE: api/Offer_API/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<OfferModel>> DeleteOfferModel(int id)
         {
-            return _context.CustomerModel.Any(e => e.Costumor_Id == id);
+            var OfferModel = await _context.OfferModel.FindAsync(id);
+            if (OfferModel == null)
+            {
+                return NotFound();
+            }
+
+            _context.OfferModel.Remove(OfferModel);
+            await _context.SaveChangesAsync();
+
+            return OfferModel;
+        }
+
+        private bool OfferModelExists(int id)
+        {
+            return _context.OfferModel.Any(e => e.Offer_ID == id);
+        }
+
+        //---------------------------------------------ServiceLineModel API--------------------------------------------
+        // PUT: api/ServiceLine_API/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutServiceLineModel(int id, ServiceLineModel serviceLineModel)
+        {
+            if (id != serviceLineModel.Service_Line_ID)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(serviceLineModel).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ServiceLineModelExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // GET: api/ServiceLine_API/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ServiceLineModel>> GetServiceLineModel(int id)
+        {
+            var serviceLineModel = await _context.ServiceLineModel.FindAsync(id);
+
+            if (serviceLineModel == null)
+            {
+                return NotFound();
+            }
+
+            return serviceLineModel;
+        }
+
+        private bool ServiceLineModelExists(int id)
+        {
+            return _context.ServiceLineModel.Any(e => e.Service_Line_ID == id);
+        }
+
+        //---------------------------------------------EmployeeOfferModel API--------------------------------------------
+        // PUT: api/EmployeeOffer_API/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutEmployeeOfferModel(int id, EmployeeOfferModel employeeOfferModel)
+        {
+            if (id != employeeOfferModel.EmployeeOffer_ID)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(employeeOfferModel).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EmployeeOfferModelExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // GET: api/EmployeeOffer_API/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<EmployeeOfferModel>> GetEmployeeOfferModel(int id)
+        {
+            var employeeOfferModel = await _context.EmployeeOfferModel.FindAsync(id);
+
+            if (employeeOfferModel == null)
+            {
+                return NotFound();
+            }
+
+            return employeeOfferModel;
+        }
+
+        private bool EmployeeOfferModelExists(int id)
+        {
+            return _context.EmployeeOfferModel.Any(e => e.EmployeeOffer_ID == id);
         }
     }
 }

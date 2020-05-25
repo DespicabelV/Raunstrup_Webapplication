@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Raunstrup_Webapplication.API;
 
 namespace Raunstrup_Webapplication.Controllers
 {
@@ -27,7 +28,7 @@ namespace Raunstrup_Webapplication.Controllers
         }
 
 
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             var serviceModel = _context.ServiceModel.ToList();
             var offerModel = _context.OfferModel.ToList();
@@ -64,6 +65,27 @@ namespace Raunstrup_Webapplication.Controllers
 
 
             return View(viewModel);
+        }
+
+        public async Task<IActionResult> ReportDetails(int[] resArray, int[] hoursArray)
+        {
+            Viggo_Temp_API test = new Viggo_Temp_API(_context);
+
+            for (int i = 0; i < resArray.Length; i = i+2)
+            {
+                var data = await _context.ServiceLineModel.FirstOrDefaultAsync(m => m.Service_Line_ID == resArray[i]);
+                data.Used_Quantity = data.Used_Quantity + resArray[i + 1];
+                await test.PutServiceLineModel(resArray[i], data);
+            }
+
+            for (int i = 0; i < hoursArray.Length; i = i + 2)
+            {
+                var data = await _context.EmployeeOfferModel.FirstOrDefaultAsync(m => m.EmployeeOffer_ID == hoursArray[i]);
+                data.HoursWorked = data.HoursWorked + hoursArray[i + 1];
+                await test.PutEmployeeOfferModel(hoursArray[i], data);
+            }
+
+            return Accepted();
         }
     }
 }
