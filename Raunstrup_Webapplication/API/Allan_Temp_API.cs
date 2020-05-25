@@ -179,14 +179,14 @@ namespace Raunstrup_Webapplication.API
 
             _fontStyle = FontFactory.GetFont("Tahoma", 8f, 1);
 
-            PdfWriter docWrite = PdfWriter.GetInstance(_document,_memoryStream);
+            PdfWriter docWrite = PdfWriter.GetInstance(_document, _memoryStream);
 
             _document.Open();
 
             float[] sizes = new float[_maxColumn];
             for (var i = 0; i < _maxColumn; i++)
             {
-                if (i==0)
+                if (i == 0)
                 {
                     sizes[i] = 20;
                 }
@@ -217,7 +217,7 @@ namespace Raunstrup_Webapplication.API
             _pdfCell.Border = 0;
             _pdfTable.AddCell(_pdfCell);
 
-            _pdfCell=new PdfPCell(this.SetPageTitle());
+            _pdfCell = new PdfPCell(this.SetPageTitle());
             _pdfCell.Colspan = _maxColumn - 1;
             _pdfCell.Border = 0;
             _pdfTable.AddCell(_pdfCell);
@@ -252,7 +252,7 @@ namespace Raunstrup_Webapplication.API
             PdfPTable pdfPTable = new PdfPTable(maxColumn);
 
             _fontStyle = FontFactory.GetFont("Tahoma", 18f, 1);
-            _pdfCell=new PdfPCell(new Phrase("Offer Information", _fontStyle));
+            _pdfCell = new PdfPCell(new Phrase("Offer Information", _fontStyle));
             _pdfCell.Colspan = maxColumn;
             _pdfCell.HorizontalAlignment = Element.ALIGN_CENTER;
             _pdfCell.Border = 0;
@@ -267,7 +267,7 @@ namespace Raunstrup_Webapplication.API
         {
             for (int i = 0; i <= nCount; i++)
             {
-                _pdfCell=new PdfPCell(new Phrase("",_fontStyle));
+                _pdfCell = new PdfPCell(new Phrase("", _fontStyle));
                 _pdfCell.Colspan = _maxColumn;
                 _pdfCell.Border = 0;
                 _pdfCell.ExtraParagraphSpace = 10;
@@ -328,7 +328,7 @@ namespace Raunstrup_Webapplication.API
 
             foreach (var offerModel in _offerModels)
             {
-                _pdfCell = new PdfPCell(new Phrase(offerModel.Offer_Title, _fontStyle))
+                _pdfCell = new PdfPCell(new Phrase(offerModel.Offer_ID.ToString(), _fontStyle))
                 {
                     HorizontalAlignment = Element.ALIGN_CENTER,
                     VerticalAlignment = Element.ALIGN_MIDDLE,
@@ -336,7 +336,7 @@ namespace Raunstrup_Webapplication.API
                 };
                 _pdfTable.AddCell(_pdfCell);
 
-                _pdfCell = new PdfPCell(new Phrase(offerModel.Offer_ID.ToString(), _fontStyle))
+                _pdfCell = new PdfPCell(new Phrase(offerModel.Offer_Title, _fontStyle))
                 {
                     HorizontalAlignment = Element.ALIGN_CENTER,
                     VerticalAlignment = Element.ALIGN_MIDDLE,

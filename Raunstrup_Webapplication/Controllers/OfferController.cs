@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Raunstrup_Webapplication.API;
 using Raunstrup_Webapplication.Data;
 using Raunstrup_Webapplication.Models;
 using Raunstrup_Webapplication.ViewModel;
@@ -23,20 +24,10 @@ namespace Raunstrup_Webapplication.Controllers
         // GET: Offer
         public IActionResult Index(string OfferID)
         {
-            //Søge Funktion til Navne uden viewmodels
-            //if (OfferName != null)
-            //{
-            //    var Data = _context.OfferModel.Where(o => o.Offer_Title.Contains(OfferName)).ToList();
-            //    return View(Data);
-            //}
-            //else
-            //{
-            //    return View(_context.OfferModel.ToList());
-            //}
-
 
             if (OfferID == null)
             {
+                var customerViewModel = _context.CustomerModel.ToList();
                 var offerViewModels = _context.OfferModel.ToList();
                 var viewModel = new OfferViewModel()
                 {
@@ -44,10 +35,12 @@ namespace Raunstrup_Webapplication.Controllers
                 };
                 return View(viewModel);
             }
+            var customerViewModelWithID = _context.CustomerModel.ToList();
             var offerViewModelsWithID = _context.OfferModel.Where(o => Convert.ToString(o.Offer_ID).Contains(OfferID)).ToList();
             var viewModelWithID = new OfferViewModel()
             {
-                OfferModels = offerViewModelsWithID
+                OfferModels = offerViewModelsWithID,
+                CustomerModels = customerViewModelWithID
             };
             return View(viewModelWithID);
         }
@@ -73,7 +66,16 @@ namespace Raunstrup_Webapplication.Controllers
         // GET: Offer/Create
         public IActionResult Create()
         {
-            return View();
+            var offerModel = _context.OfferModel.ToList();
+            var customerModel = _context.CustomerModel.ToList();
+
+            var viewModel = new OfferViewModel
+            {
+                OfferModels = offerModel,
+                CustomerModels = customerModel
+            };
+
+            return View(viewModel);
         }
 
         // POST: Offer/Create
@@ -81,15 +83,27 @@ namespace Raunstrup_Webapplication.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Offer_ID,Offer_Title,ForeignKey1_,Start_date,End_Date,Offer_Price,Status")] OfferModel offerModel)
+        public async Task<IActionResult> Create(OfferViewModel offerViewModel)
         {
-            if (ModelState.IsValid)
+            
+            var offerModel = new OfferModel
             {
-                _context.Add(offerModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(offerModel);
+                Offer_ID = offerViewModel.OfferModel.Offer_ID,
+                Offer_Title = offerViewModel.OfferModel.Offer_Title,
+                Offer_Price = offerViewModel.OfferModel.Offer_Price,
+                Start_date = offerViewModel.OfferModel.Start_date,
+                End_Date = offerViewModel.OfferModel.End_Date,
+                Status = offerViewModel.OfferModel.Status,
+                ForeignKey1_ = offerViewModel.OfferModel.ForeignKey1_
+            };
+            var customerID = _context.CustomerModel.Find(offerViewModel.OfferModel.ForeignKey1_.Costumor_Id);
+            offerModel.ForeignKey1_ = customerID;
+
+            Nichlas_Temp_API api = new Nichlas_Temp_API(_context);
+            await api.PostOfferModel(offerModel);
+
+            return RedirectToAction("Create", "ServiceLine");
+
         }
 
         // GET: Offer/Edit/5

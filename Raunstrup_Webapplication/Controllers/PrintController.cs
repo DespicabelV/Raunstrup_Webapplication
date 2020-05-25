@@ -33,7 +33,7 @@ namespace Raunstrup_Webapplication.Controllers
 
 
         // GET: Print/Index/OfferID
-        public async Task<IActionResult> Index(string OfferID)
+        public IActionResult Index(string OfferID)
         {
             var offerViewModel = _context.OfferModel.Where(o => Convert.ToString(o.Offer_ID).Contains(OfferID)).ToList();
             var customerViewModel = _context.CustomerModel.ToList();
@@ -49,27 +49,67 @@ namespace Raunstrup_Webapplication.Controllers
             }
             
             return View(viewModel);
-            
         }
 
-        public IActionResult PrintOffer(string OfferID)
-        {
-            List<OfferModel> offerModels = new List<OfferModel>();
-            IEnumerable<OfferModel> _offerModel = _context.OfferModel.ToList().Where(x => Convert.ToString(x.Offer_ID).Contains(OfferID)).ToList();
+        //public ActionResult PrintOffer(string OfferID)
+        //{
+        //    List<OfferModel> om = new List<OfferModel>();
+        //    var offerViewModel = _context.OfferModel.Where(o => Convert.ToString(o.Offer_ID).Contains(OfferID)).ToList();
+        //    var customerViewModel = _context.CustomerModel.ToList();
+        //    var viewModel = new PrintViewModel
+        //    {
+        //        OfferModels = offerViewModel,
+        //        CustomerModels = customerViewModel
+        //    };
+        //    om.Add(viewModel.OfferModel);
+        //    return View(om);
+        //}
 
-            foreach (var i in _offerModel)
+        public ActionResult PrintOffer(string OfferID)
+        {
+            List<OfferModel> Offer = new List<OfferModel>();
+            var offerViewModel = _context.OfferModel.Where(o => Convert.ToString(o.Offer_ID).Contains(OfferID)).ToList();
+            List<OfferModel> OfferDetails = _context.OfferModel.Where(o => Convert.ToString(o.Offer_ID).Contains(OfferID)).ToList();
+
+            var array = new object[5];
+
+            var customerViewModel = _context.CustomerModel.ToList();
+
+            var viewModel = new PrintViewModel()
+            {
+                OfferModels = offerViewModel,
+                CustomerModels = customerViewModel
+            };
+
+
+            foreach (var i in OfferDetails)
             {
                 OfferModel offerModel = new OfferModel();
-                offerModel.Offer_ID = Convert.ToInt32(i);
-                offerModel.Offer_Title = "Title: " + i;
-                offerModel.ForeignKey1_.Name = "Customer Name" + i;
-                offerModel.Start_date = Convert.ToDateTime(i);
-                offerModel.End_Date = Convert.ToDateTime(i);
-                offerModel.Offer_Price = Convert.ToDouble(i);
-                offerModels.Add(offerModel);
+                offerModel.End_Date = i.End_Date;
+                offerModel.ForeignKey1_ = i.ForeignKey1_;
+                offerModel.Offer_ID = i.Offer_ID;
+                offerModel.Offer_Price = i.Offer_Price;
+                offerModel.Offer_Title = i.Offer_Title;
+                offerModel.Start_date = i.Start_date;
+
+                Offer.Add(offerModel);
             }
+
+
+
+            //foreach (var i in offerViewModel)
+            //{
+            //    OfferModel offerModel = new OfferModel();
+            //    offerModel.End_Date = "Start date" + i;
+            //    offerModel.ForeignKey1_ = "Customer name" + i;
+            //    offerModel.Offer_ID = Convert.ToInt32(i);
+            //    offerModel.Offer_Price = Convert.ToDouble(i);
+            //    offerModel.Offer_Title = "Title" + i;
+            //    offerModel.Start_date = Convert.ToDateTime(i);
+            //    offerModels.Add(offerModel);
+            //}
             OfferPrint rtp = new OfferPrint(_hostEnvironment);
-            return File(rtp.Print(offerModels), "application/pdf");
+            return File(rtp.Print(Offer), "application/pdf");
 
 
         }
