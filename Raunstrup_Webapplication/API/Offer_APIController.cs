@@ -112,5 +112,18 @@ namespace Raunstrup_Webapplication.API
         }
 
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<OfferModel>> GetCustomerModel(int id)
+        {
+            var offerModel = await _context.OfferModel.FindAsync(id);
+
+            if (offerModel == null)
+            {
+                return NotFound();
+            }
+
+            return offerModel;
+        }
+
     }
 }

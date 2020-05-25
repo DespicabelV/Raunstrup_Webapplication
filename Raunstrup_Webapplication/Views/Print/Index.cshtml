@@ -80,11 +80,7 @@ else
                 </button>
             </form>
 
-                @*<a class="btn btn-lg btn-block btn-outline-primary btn-sm" href="@Model.OfferModel.ForeignKey1_.Email?subject=Your Offer &body=hiii">
-                    E-mail this offer
-                </a>*@
-            
-            <a class="btn btn-lg btn-block btn-outline-primary btn-sm" href="mailto:your-Email?subject=Your Offer &body=hiii">
+            <a class="btn btn-lg btn-block btn-outline-primary btn-sm" href="mailto:?subject=Your Offer &body=This is our offer, Please save this E-mail.">
                 @* ?subject gør at man kan ændre i titel ved mailen. &body gør at man kan ændre i hvad der skal stå i mailen.
                     &cc gør det muligt at tilføje en kontakt. &bcc gør det muligt at tiføje endnu en kontakt*@
                 E-mail this offer
@@ -106,7 +102,7 @@ else
     <script>
         $(document).ready(function () {
             $("#Filter").click({
-                source: "api/Allan_Temp_API/Search"
+                source: "api/Offer_APIController/Search"
             })
         })
     </script>

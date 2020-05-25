@@ -25,13 +25,6 @@ namespace Raunstrup_Webapplication.Controllers
             this._hostEnvironment = _hostEnvironment;
         }
 
-        //public PrintController(IWebHostEnvironment _hostEnvironment)
-        //{
-        //    this._hostEnvironment = _hostEnvironment;
-        //}
-
-
-
         // GET: Print/Index/OfferID
         public IActionResult Index(string OfferID)
         {
@@ -50,20 +43,6 @@ namespace Raunstrup_Webapplication.Controllers
             
             return View(viewModel);
         }
-
-        //public ActionResult PrintOffer(string OfferID)
-        //{
-        //    List<OfferModel> om = new List<OfferModel>();
-        //    var offerViewModel = _context.OfferModel.Where(o => Convert.ToString(o.Offer_ID).Contains(OfferID)).ToList();
-        //    var customerViewModel = _context.CustomerModel.ToList();
-        //    var viewModel = new PrintViewModel
-        //    {
-        //        OfferModels = offerViewModel,
-        //        CustomerModels = customerViewModel
-        //    };
-        //    om.Add(viewModel.OfferModel);
-        //    return View(om);
-        //}
 
         public ActionResult PrintOffer(string OfferID)
         {
@@ -97,18 +76,8 @@ namespace Raunstrup_Webapplication.Controllers
 
 
 
-            //foreach (var i in offerViewModel)
-            //{
-            //    OfferModel offerModel = new OfferModel();
-            //    offerModel.End_Date = "Start date" + i;
-            //    offerModel.ForeignKey1_ = "Customer name" + i;
-            //    offerModel.Offer_ID = Convert.ToInt32(i);
-            //    offerModel.Offer_Price = Convert.ToDouble(i);
-            //    offerModel.Offer_Title = "Title" + i;
-            //    offerModel.Start_date = Convert.ToDateTime(i);
-            //    offerModels.Add(offerModel);
-            //}
-            OfferPrint rtp = new OfferPrint(_hostEnvironment);
+            
+            Print_APIController rtp = new Print_APIController(_hostEnvironment);
             return File(rtp.Print(Offer), "application/pdf");
 
 
