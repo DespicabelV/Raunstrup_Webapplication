@@ -68,7 +68,6 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Offer_ID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Offer_ID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Offer_ID">Delete</a>
             </td>
@@ -84,18 +83,14 @@
     <script
         src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-        crossorigin="anonymous"></script>
-    @*<script> Søge funktion til Navne
-        $(document).ready(function() {
-            $("#Filter").autocomplete({
-                source: "api/Nichlas_Temp_API/Search"
-            })
-        })
-    </script>*@   
+        crossorigin="anonymous">
+
+    </script>
+
     <script>
         $(document).ready(function () {
             $("#Filter").click({
-                source: "api/Nichlas_Temp_API/Search"
+                source: "api/Offer_APIController/Search"
             })
         })
     </script>

@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Raunstrup_Webapplication.Data;
 using Raunstrup_Webapplication.Models;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Raunstrup_Webapplication.API
 {
@@ -82,5 +84,33 @@ namespace Raunstrup_Webapplication.API
         {
             return _context.OfferModel.Any(e => e.Offer_ID == id);
         }
+
+        [HttpPost]
+        public async Task<ActionResult<OfferModel>> PostOfferModel(OfferModel offerModel)
+        {
+            _context.OfferModel.Add(offerModel);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetOfferModel", new { id = offerModel.Offer_ID }, offerModel);
+        }
+
+        [Produces("application/json")]
+        [HttpGet("Search")]
+        public IActionResult Search()
+        {
+            try
+            {
+                string Filter = HttpContext.Request.Query["Filter"].ToString();
+                var Titel = _context.OfferModel.Where(o => Convert.ToString(o.Offer_ID).Contains(Filter))
+                    .Select(o => o.Offer_ID).ToList();
+                return Ok(Titel);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+
     }
 }

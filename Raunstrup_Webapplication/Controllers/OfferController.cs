@@ -99,64 +99,12 @@ namespace Raunstrup_Webapplication.Controllers
             var customerID = _context.CustomerModel.Find(offerViewModel.OfferModel.ForeignKey1_.Costumor_Id);
             offerModel.ForeignKey1_ = customerID;
 
-            Nichlas_Temp_API api = new Nichlas_Temp_API(_context);
+            Offer_APIController api = new Offer_APIController(_context);
             await api.PostOfferModel(offerModel);
 
             return RedirectToAction("Create", "ServiceLine");
 
         }
-
-        // GET: Offer/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var offerModel = await _context.OfferModel.FindAsync(id);
-            if (offerModel == null)
-            {
-                return NotFound();
-            }
-            return View(offerModel);
-        }
-
-        // POST: Offer/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Offer_ID,Offer_Title,ForeignKey1_,Start_date,End_Date,Offer_Price,Status")] OfferModel offerModel)
-        {
-            if (id != offerModel.Offer_ID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(offerModel);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!OfferModelExists(offerModel.Offer_ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(offerModel);
-        }
-
         // GET: Offer/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

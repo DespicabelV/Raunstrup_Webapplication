@@ -65,5 +65,14 @@ namespace Raunstrup_Webapplication.API
         {
             return _context.ServiceLineModel.Any(e => e.Service_Line_ID == id);
         }
+
+        [HttpPost]
+        public async Task<ActionResult<ServiceLineModel>> PostEmployeeOfferModel(ServiceLineModel serviceLineModel)
+        {
+            _context.ServiceLineModel.Add(serviceLineModel);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetServiceLineModel", new { id = serviceLineModel.Service_Line_ID }, serviceLineModel);
+        }
     }
 }

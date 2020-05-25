@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Raunstrup_Webapplication.API;
 using Raunstrup_Webapplication.Data;
 using Raunstrup_Webapplication.Models;
 using Raunstrup_Webapplication.ViewModel;
@@ -110,64 +111,14 @@ namespace Raunstrup_Webapplication.Controllers
                 serviceLineModel.ForeignKey1_ = resID;
                 serviceLineModel.ForeignKey3_ = offerID;
 
-                _context.ServiceLineModel.Add(serviceLineModel);
-                await _context.SaveChangesAsync();
+                ServiceLine_APIController api = new ServiceLine_APIController(_context);
+                await api.PostEmployeeOfferModel(serviceLineModel);
                 return RedirectToAction("Create");
             }
 
             return RedirectToAction("Create");
         }
 
-        // GET: ServiceLine/Edit/5 
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var serviceLineModel = await _context.ServiceLineModel.FindAsync(id);
-            if (serviceLineModel == null)
-            {
-                return NotFound();
-            }
-            return View(serviceLineModel);
-        }
-
-        // POST: ServiceLine/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Service_Line_ID,Resource_Quantity")] ServiceLineModel serviceLineModel)
-        {
-            if (id != serviceLineModel.Service_Line_ID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(serviceLineModel);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ServiceLineModelExists(serviceLineModel.Service_Line_ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(serviceLineModel);
-        }
 
         // GET: ServiceLine/Delete/5
         public async Task<IActionResult> Delete(int? id)

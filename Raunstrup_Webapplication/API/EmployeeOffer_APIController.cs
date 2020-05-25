@@ -65,5 +65,14 @@ namespace Raunstrup_Webapplication.API
         {
             return _context.EmployeeOfferModel.Any(e => e.EmployeeOffer_ID == id);
         }
+
+        [HttpPost]
+        public async Task<ActionResult<EmployeeOfferModel>> PostEmployeeOfferModel(EmployeeOfferModel employeeOfferModel)
+        {
+            _context.EmployeeOfferModel.Add(employeeOfferModel);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetEmployeeOfferModel", new { id = employeeOfferModel.EmployeeOffer_ID }, employeeOfferModel);
+        }
     }
 }

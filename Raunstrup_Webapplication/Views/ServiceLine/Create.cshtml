@@ -45,12 +45,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="ServiceLineModel.Added_Quantity" class="control-label"></label>
-                <input asp-for="ServiceLineModel.Added_Quantity" class="form-control" />
+                <input asp-for="ServiceLineModel.Added_Quantity" value="0" readonly="readonly" class="form-control" />
                 <span asp-validation-for="ServiceLineModel.Added_Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ServiceLineModel.Used_Quantity" class="control-label"></label>
-                <input asp-for="ServiceLineModel.Used_Quantity" class="form-control" />
+                <input asp-for="ServiceLineModel.Used_Quantity"  value="0" readonly="readonly" class="form-control" />
                 <span asp-validation-for="ServiceLineModel.Used_Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">

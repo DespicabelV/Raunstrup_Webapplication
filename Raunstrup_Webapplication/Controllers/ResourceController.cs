@@ -65,57 +65,6 @@ namespace Raunstrup_Webapplication.Controllers
             return View(resourceModel);
         }
 
-        // GET: Resource/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var resourceModel = await _context.ResourceModel.FindAsync(id);
-            if (resourceModel == null)
-            {
-                return NotFound();
-            }
-            return View(resourceModel);
-        }
-
-        // POST: Resource/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Res_ID,Name")] ResourceModel resourceModel)
-        {
-            if (id != resourceModel.Res_ID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(resourceModel);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ResourceModelExists(resourceModel.Res_ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(resourceModel);
-        }
-
         // GET: Resource/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

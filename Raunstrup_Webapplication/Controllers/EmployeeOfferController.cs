@@ -21,30 +21,6 @@ namespace Raunstrup_Webapplication.Controllers
             _context = context;
         }
 
-        // GET: EmployeeOffer
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.EmployeeOfferModel.ToListAsync());
-        }
-
-        // GET: EmployeeOffer/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var employeeOfferModel = await _context.EmployeeOfferModel
-                .FirstOrDefaultAsync(m => m.EmployeeOffer_ID == id);
-            if (employeeOfferModel == null)
-            {
-                return NotFound();
-            }
-
-            return View(employeeOfferModel);
-        }
-
         // GET: EmployeeOffer/Create
         public IActionResult Create()
         {
@@ -80,90 +56,10 @@ namespace Raunstrup_Webapplication.Controllers
                 employeeOfferModel.ForeignKey1_ = offerID;
                 employeeOfferModel.ForeignKey2_ = EmployeeID;
 
-                Nichlas_Temp_API api = new Nichlas_Temp_API(_context);
+                EmployeeOffer_APIController api = new EmployeeOffer_APIController(_context);
                 await api.PostEmployeeOfferModel(employeeOfferModel);
             }
             return RedirectToAction("Create", "ServiceLine");
-        }
-
-        // GET: EmployeeOffer/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var employeeOfferModel = await _context.EmployeeOfferModel.FindAsync(id);
-            if (employeeOfferModel == null)
-            {
-                return NotFound();
-            }
-            return View(employeeOfferModel);
-        }
-
-        // POST: EmployeeOffer/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EmployeeOffer_ID")] EmployeeOfferModel employeeOfferModel)
-        {
-            if (id != employeeOfferModel.EmployeeOffer_ID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(employeeOfferModel);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EmployeeOfferModelExists(employeeOfferModel.EmployeeOffer_ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(employeeOfferModel);
-        }
-
-        // GET: EmployeeOffer/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var employeeOfferModel = await _context.EmployeeOfferModel
-                .FirstOrDefaultAsync(m => m.EmployeeOffer_ID == id);
-            if (employeeOfferModel == null)
-            {
-                return NotFound();
-            }
-
-            return View(employeeOfferModel);
-        }
-
-        // POST: EmployeeOffer/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var employeeOfferModel = await _context.EmployeeOfferModel.FindAsync(id);
-            _context.EmployeeOfferModel.Remove(employeeOfferModel);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool EmployeeOfferModelExists(int id)
