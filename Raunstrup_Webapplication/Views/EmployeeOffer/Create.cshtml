@@ -1,5 +1,5 @@
 ﻿@model Raunstrup_Webapplication.ViewModel.EmployeeOfferViewModel
-
+@* Nichlas *@
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -21,7 +21,7 @@
 
 <h1>Create</h1>
 
-<h4>EmployeeOfferModel</h4>
+<h4>EmployeeOffer</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -29,15 +29,15 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="EmployeeOfferModel.ForeignKey1_.Offer_ID" class="control-label"></label>
-                @Html.DropDownListFor(m => m.EmployeeOfferModel.ForeignKey1_.Offer_ID, new SelectList(Model.OfferModels, "Offer_ID", "Offer_ID", "Offer_ID"), "---Select OfferID---", new { @class = "form-group" })
+                @Html.DropDownListFor(m => m.EmployeeOfferModel.ForeignKey1_.Offer_ID, new SelectList(Model.OfferModels, "Offer_ID", "Offer_ID", "Offer_ID"), "-Select OfferID-", new { @class = "form-group" })
             </div>
             <div class="form-group">
                 <label asp-for="EmployeeOfferModel.ForeignKey2_.Employee_ID" class="control-label"></label>
-                @Html.DropDownListFor(m => m.EmployeeOfferModel.ForeignKey2_.Employee_ID, new SelectList(Model.EmployeeModels, "Employee_ID", "Employee_ID", "Employee_ID"), "---Select Employee---", new { @class = "form-group" })
+                @Html.DropDownListFor(m => m.EmployeeOfferModel.ForeignKey2_.Employee_ID, new SelectList(Model.EmployeeModels, "Employee_ID", "Employee_ID", "Employee_ID"), "-Select Employee-", new { @class = "form-group" })
             </div>
             <div class="form-group">
                 <label asp-for="EmployeeOfferModel.HoursWorked" class="control-label"></label>
-                <input asp-for="EmployeeOfferModel.HoursWorked" class="form-control" />
+                <input asp-for="EmployeeOfferModel.HoursWorked" value="0" readonly="readonly" class="form-control" />
                 <span asp-validation-for="EmployeeOfferModel.HoursWorked" class="text-danger"></span>
             </div>
             <div class="form-group">

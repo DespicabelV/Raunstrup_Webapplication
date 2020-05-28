@@ -21,6 +21,8 @@ namespace Raunstrup_Webapplication.Controllers
             _context = context;
         }
 
+
+        //Nnichlas
         // GET: EmployeeOffer/Create
         public IActionResult Create()
         {
@@ -36,6 +38,8 @@ namespace Raunstrup_Webapplication.Controllers
             return View(viewModel);
         }
 
+
+        //Nichlas
         // POST: EmployeeOffer/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

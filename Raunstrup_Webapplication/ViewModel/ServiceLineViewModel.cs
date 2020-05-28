@@ -6,6 +6,7 @@ using Raunstrup_Webapplication.Models;
 
 namespace Raunstrup_Webapplication.ViewModel
 {
+    //Nichlas
     public class ServiceLineViewModel
     {
         public IEnumerable<ServiceLineModel> ServiceLineModels { get; set; }
