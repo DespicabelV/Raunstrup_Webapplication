@@ -6,6 +6,7 @@ using Raunstrup_Webapplication.Models;
 
 namespace Raunstrup_Webapplication.ViewModel
 {
+    //Nichlas
     public class OfferViewModel
     {
         public IEnumerable<OfferModel> OfferModels { get; set; }

@@ -6,6 +6,7 @@ using Raunstrup_Webapplication.Models;
 
 namespace Raunstrup_Webapplication.ViewModel
 {
+    //Viggo
     public class ReportViewModel
     {
         public ServiceLineModel ServiceLineModel { get; set; }

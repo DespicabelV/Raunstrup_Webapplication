@@ -1,5 +1,5 @@
 ﻿@model Raunstrup_Webapplication.ViewModel.OfferViewModel
-
+@* Nichlas *@
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,7 +7,7 @@
 
 <h1>Create</h1>
 
-<h4>OfferModel</h4>
+<h4>Offer</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -33,7 +33,7 @@
                 <span asp-validation-for="OfferModel.End_Date" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="OfferModel.Offer_Price" class="control-label"></label>
+                <label asp-for="OfferModel.Offer_Price" class="control-label"> Estimated Price</label>
                 <input asp-for="OfferModel.Offer_Price" class="form-control" />
                 <span asp-validation-for="OfferModel.Offer_Price" class="text-danger"></span>
             </div>

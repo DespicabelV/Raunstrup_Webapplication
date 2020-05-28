@@ -22,6 +22,7 @@ namespace Raunstrup_Webapplication.Controllers
             _context = context;
         }
 
+        //Nichlas
         // GET: ServiceLine
         public async Task<IActionResult> Index()
         {
@@ -61,6 +62,7 @@ namespace Raunstrup_Webapplication.Controllers
             return View(serviceLineModel);
         }
 
+        //Nichlas
         // GET: ServiceLine/Create
         public IActionResult Create()
         {
@@ -84,6 +86,7 @@ namespace Raunstrup_Webapplication.Controllers
             return View(viewModel);
         }
 
+        //Nichlas
         // POST: ServiceLine/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -118,7 +121,6 @@ namespace Raunstrup_Webapplication.Controllers
 
             return RedirectToAction("Create");
         }
-
 
         // GET: ServiceLine/Delete/5
         public async Task<IActionResult> Delete(int? id)

@@ -1,5 +1,5 @@
 ﻿@model Raunstrup_Webapplication.ViewModel.ServiceLineViewModel
-
+@* Nichlas *@
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -27,16 +27,16 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div class="form-group">
-                <label asp-for="ServiceLineModel.ForeignKey1_.Name" class="control-label">Resource: </label>
-                @Html.DropDownListFor(m => m.ServiceLineModel.ForeignKey1_.Res_ID, new SelectList(Model.ResourceModel, "Res_ID", "Name", "Res_ID"), "-Select Resource-", new { @class = "form-group" })
+                <label asp-for="ServiceLineModel.ForeignKey3_.Offer_ID" class="control-label">Offer: </label>
+                @Html.DropDownListFor(m => m.ServiceLineModel.ForeignKey3_.Offer_ID, new SelectList(Model.OfferModel, "Offer_ID", "Offer_ID"), "-Select Offer-", new { @class = "form-group" })
             </div>
             <div class="form-group">
                 <label asp-for="ServiceLineModel.ForeignKey2_" class="control-label">Service: </label>
                 @Html.DropDownListFor(m => m.ServiceLineModel.ForeignKey2_.Service_ID, new SelectList(Model.ServiceModel, "Service_ID", "Name", "Service_ID"), "-Select Service-", new { @class = "form-group" })
             </div>
             <div class="form-group">
-                <label asp-for="ServiceLineModel.ForeignKey3_.Offer_ID" class="control-label">Offer: </label>
-                @Html.DropDownListFor(m => m.ServiceLineModel.ForeignKey3_.Offer_ID, new SelectList(Model.OfferModel, "Offer_ID", "Offer_ID"), "-Select Offer-", new { @class = "form-group" })
+                <label asp-for="ServiceLineModel.ForeignKey1_.Name" class="control-label">Resource: </label>
+                @Html.DropDownListFor(m => m.ServiceLineModel.ForeignKey1_.Res_ID, new SelectList(Model.ResourceModel, "Res_ID", "Name", "Res_ID"), "-Select Resource-", new { @class = "form-group" })
             </div>
             <div class="form-group">
                 <label asp-for="ServiceLineModel.Resource_Quantity" class="control-label"></label>
@@ -50,7 +50,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ServiceLineModel.Used_Quantity" class="control-label"></label>
-                <input asp-for="ServiceLineModel.Used_Quantity"  value="0" readonly="readonly" class="form-control" />
+                <input asp-for="ServiceLineModel.Used_Quantity" value="0" readonly="readonly" class="form-control" />
                 <span asp-validation-for="ServiceLineModel.Used_Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -61,35 +61,35 @@
     <div class="col-md-8">
         <table class="table table-striped table-sm">
             <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.EmployeeOfferModel.EmployeeOffer_ID)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EmployeeOfferModel.ForeignKey2_.Name)
-                </th>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployeeOfferModel.EmployeeOffer_ID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployeeOfferModel.ForeignKey2_.Name)
+                    </th>
 
-                <th>
-                    @Html.DisplayNameFor(model => model.EmployeeOfferModel.ForeignKey2_.Expertise)
-                </th>
-            </tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmployeeOfferModel.ForeignKey2_.Expertise)
+                    </th>
+                </tr>
             </thead>
             <tbody>
-            @foreach (var item in Model.EmployeeModels)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Employee_ID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Expertise)
-                    </td>
+                @foreach (var item in Model.EmployeeModels)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Employee_ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Expertise)
+                        </td>
 
-                </tr>
-            }
+                    </tr>
+                }
 
             </tbody>
         </table>
@@ -100,7 +100,7 @@
 
 </div>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Offer" asp-action="Index">Back to Offers</a>
 </div>
 
 @section Scripts {

@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Raunstrup_Webapplication.API;
 using Raunstrup_Webapplication.Data;
 using Raunstrup_Webapplication.Models;
 using Raunstrup_Webapplication.ViewModel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-
+//Lavet af Allan
 namespace Raunstrup_Webapplication.Controllers
 {
     public class PrintController : Controller
@@ -40,19 +38,14 @@ namespace Raunstrup_Webapplication.Controllers
             {
                 return View(viewModel);
             }
-            
+
             return View(viewModel);
         }
 
         public ActionResult PrintOffer(string OfferID)
         {
-            List<OfferModel> Offer = new List<OfferModel>();
-            var offerViewModel = _context.OfferModel.Where(o => Convert.ToString(o.Offer_ID).Contains(OfferID)).ToList();
-            List<OfferModel> OfferDetails = _context.OfferModel.Where(o => Convert.ToString(o.Offer_ID).Contains(OfferID)).ToList();
-
-            var array = new object[5];
-
             var customerViewModel = _context.CustomerModel.ToList();
+            var offerViewModel = _context.OfferModel.Where(o => Convert.ToString(o.Offer_ID).Contains(OfferID)).ToList();
 
             var viewModel = new PrintViewModel()
             {
@@ -60,6 +53,8 @@ namespace Raunstrup_Webapplication.Controllers
                 CustomerModels = customerViewModel
             };
 
+            List<OfferModel> Offer = new List<OfferModel>();
+            List<OfferModel> OfferDetails = _context.OfferModel.Where(o => Convert.ToString(o.Offer_ID).Contains(OfferID)).ToList();
 
             foreach (var i in OfferDetails)
             {
@@ -74,13 +69,8 @@ namespace Raunstrup_Webapplication.Controllers
                 Offer.Add(offerModel);
             }
 
-
-
-            
-            Print_APIController rtp = new Print_APIController(_hostEnvironment);
-            return File(rtp.Print(Offer), "application/pdf");
-
-
+            Print_APIController Print_Api = new Print_APIController(_hostEnvironment);
+            return File(Print_Api.Print(Offer), "application/pdf");
         }
     }
 }
