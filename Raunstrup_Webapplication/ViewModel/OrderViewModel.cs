@@ -1,7 +1,7 @@
 ﻿using Raunstrup_Webapplication.Models;
 using System.Collections.Generic;
 
-namespace Raunstrup_Webapplication.ViewModel
+namespace Raunstrup_Webapplication.ViewModel //Jacob
 {
     public class OrderViewModel
     {
