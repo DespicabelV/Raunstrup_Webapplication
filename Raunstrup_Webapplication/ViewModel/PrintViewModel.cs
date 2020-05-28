@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Raunstrup_Webapplication.Models;
 
+//Lavet af Allan
 namespace Raunstrup_Webapplication.ViewModel
 {
     public class PrintViewModel

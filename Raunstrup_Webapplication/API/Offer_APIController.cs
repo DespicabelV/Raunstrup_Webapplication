@@ -94,6 +94,7 @@ namespace Raunstrup_Webapplication.API
             return CreatedAtAction("GetOfferModel", new { id = offerModel.Offer_ID }, offerModel);
         }
 
+        //Lavet af Nichlas og Allan
         [Produces("application/json")]
         [HttpGet("Search")]
         public IActionResult Search()
